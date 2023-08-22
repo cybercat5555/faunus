@@ -1,10 +1,12 @@
-package com.example;
+package cybercat5555.faunus;
 
 import net.fabricmc.api.ClientModInitializer;
 
-public class ExampleModClient implements ClientModInitializer {
+public class FaunusClient implements ClientModInitializer
+{
 	@Override
-	public void onInitializeClient() {
+	public void onInitializeClient()
+	{
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
 	}
 }

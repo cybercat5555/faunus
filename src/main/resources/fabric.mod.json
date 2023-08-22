@@ -1,31 +1,35 @@
 {
 	"schemaVersion": 1,
-	"id": "modid",
+	"id": "faunus",
 	"version": "${version}",
-	"name": "Example mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Faunus",
+	"description": "Adds a variety of animal mobs",
 	"authors": [
-		"Me!"
+		"cybercat5555",
+		"Wolverbyte",
+		"Lafolie",
+		"BenlikesSharks",
+		"Assasingus14"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/cybercat5555/faunus"
 	},
-	"license": "CC0-1.0",
+	"license": "CC-BY-NC-ND-4.0",
 	"icon": "assets/modid/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.example.ExampleMod"
+			"cybercat5555.faunus.Faunus"
 		],
 		"client": [
-			"com.example.ExampleModClient"
+			"cybercat5555.faunus.FaunusClient"
 		]
 	},
 	"mixins": [
-		"modid.mixins.json",
+		"faunus.mixins.json",
 		{
-			"config": "modid.client.mixins.json",
+			"config": "faunus.client.mixins.json",
 			"environment": "client"
 		}
 	],
@@ -33,7 +37,9 @@
 		"fabricloader": ">=0.14.21",
 		"minecraft": "~1.20.1",
 		"java": ">=17",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"geckolib": ">=4.2.2",
+		"smartbrainlib": ">=1.11.2"
 	},
 	"suggests": {
 		"another-mod": "*"
