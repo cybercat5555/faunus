@@ -14,5 +14,6 @@ public class Faunus implements ModInitializer
 	public void onInitialize()
 	{
 		LOG.info("Hello Fabric world!");
+		FaunusEntities.init();
 	}
 }
