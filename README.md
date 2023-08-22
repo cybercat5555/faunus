@@ -8,10 +8,10 @@ TODO: Write stuff here.
 
 ## Dependencies
 
-Minecraft `1.20.1`
-Fabric API `0.85.0+`
-GeckoLib `4.2.2+`
-Smart Brain Lib `1.11.2+`
+* Minecraft `1.20.1`
+* Fabric API `0.85.0+`
+* GeckoLib `4.2.2+`
+* Smart Brain Lib `1.11.2+`
 
 ## Build Instructions
 
