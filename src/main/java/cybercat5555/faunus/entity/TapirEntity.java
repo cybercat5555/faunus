@@ -51,6 +51,7 @@ public class TapirEntity extends AnimalEntity implements GeoEntity
 	@Override
 	public void registerControllers(ControllerRegistrar controllers)
 	{
+		//TODO: add proper args here for animations
 		controllers.add(new AnimationController<>(this, "idle", 5, this::idleAnimController));
 	}
 
