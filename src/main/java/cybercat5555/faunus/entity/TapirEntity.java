@@ -36,7 +36,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTar
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
-
+import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimationController;
@@ -86,6 +86,7 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 		return ObjectArrayList.of
 		(
 			new NearbyLivingEntitySensor<>(),
+			new NearbyPlayersSensor<>(),
 			new HurtBySensor<>()
 		);
 	}

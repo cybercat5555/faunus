@@ -9,7 +9,7 @@ public class TapirEntityRenderer extends GeoEntityRenderer<TapirEntity>
 {
 	public TapirEntityRenderer(Context renderManager)
 	{
-		super(renderManager, new DefaultedEntityGeoModel<TapirEntity>(FaunusID.content("tapir")));
+		super(renderManager, new DefaultedEntityGeoModel<TapirEntity>(FaunusID.content("tapir"), true));
 	}
 	
 }
