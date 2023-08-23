@@ -59,6 +59,9 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 	}
 
 	@Override
+	public final void initGoals() {}
+
+	@Override
 	protected Brain.Profile<?> createBrainProfile()
 	{
 		return new SmartBrainProvider<>(this);
