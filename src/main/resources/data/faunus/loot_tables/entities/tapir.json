@@ -68,7 +68,7 @@
 				"function": "minecraft:looting_enchant"
 			  }
 			],
-			"name": "faunus:cooked_tapir_meat"
+			"name": "faunus:tapir_meat"
 		  }
 		],
 		"rolls": 1.0

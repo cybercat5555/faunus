@@ -1,0 +1,10 @@
+{
+	"type": "minecraft:smelting",
+	"category": "food",
+	"cookingtime": 200,
+	"experience": 0.35,
+	"ingredient": {
+	  "item": "faunus:tapir_meat"
+	},
+	"result": "faunus:cooked_tapir_meat"
+  }
