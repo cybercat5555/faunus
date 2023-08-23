@@ -1,4 +1,6 @@
 {
 	"itemGroup.faunus.item_group": "Faunus Items",
-	"item.faunus.tapir_spawn_egg": "Tapir Spawn Egg"
+	"item.faunus.tapir_spawn_egg": "Tapir Spawn Egg",
+	"item.faunus.tapir_meat": "Tapir Meat",
+	"item.faunus.cooked_tapir_meat": "Tapir Steak"
 }

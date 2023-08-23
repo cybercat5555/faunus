@@ -3,6 +3,7 @@ package cybercat5555.faunus;
 import cybercat5555.faunus.util.FaunusID;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -17,12 +18,16 @@ public final class FaunusItems
 	private FaunusItems() {}
 
 	public static final Item TAPIR_SPAWN_EGG = new SpawnEggItem(FaunusEntities.TAPIR, 0xa09010, 0x60400a, new FabricItemSettings());
+	public static final Item TAPIR_MEAT = new Item(new FabricItemSettings().food(FaunusFoodComponents.TAPIR_MEAT));
+	public static final Item COOKED_TAPIR_MEAT = new Item(new FabricItemSettings().food(FaunusFoodComponents.COOKED_TAPIR_MEAT));
 
 	private static final ItemGroup GROUP = FabricItemGroup.builder()
 	.icon(() -> new ItemStack(Items.LILY_PAD))
 	.displayName(Text.translatable("itemGroup.faunus.item_group"))
 	.entries((context, entries) ->
 	{
+		entries.add(TAPIR_MEAT);
+		entries.add(COOKED_TAPIR_MEAT);
 		entries.add(TAPIR_SPAWN_EGG);
 	})
 	.build();
@@ -30,7 +35,10 @@ public final class FaunusItems
 	public static void init()
 	{
 		Registry.register(Registries.ITEM, FaunusID.content("tapir_spawn_egg"), TAPIR_SPAWN_EGG);
-		
+		Registry.register(Registries.ITEM, FaunusID.content("tapir_meat"), TAPIR_MEAT);
+		Registry.register(Registries.ITEM, FaunusID.content("cooked_tapir_meat"), COOKED_TAPIR_MEAT);
+
+
 		Registry.register(Registries.ITEM_GROUP, FaunusID.content("item_group"), GROUP);
 	}
 }
