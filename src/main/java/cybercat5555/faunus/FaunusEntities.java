@@ -19,7 +19,7 @@ public final class FaunusEntities
 		Registries.ENTITY_TYPE, 
 		FaunusID.content("tapir"), 
 		FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TapirEntity::new)
-			.dimensions(EntityDimensions.fixed(1f, 1f)) //TODO: add proper dimensions here & figure out what it actually does
+			.dimensions(EntityDimensions.fixed(0.9f, 1.4f))
 			.build()
 	);
 

@@ -1,20 +1,24 @@
 package cybercat5555.faunus.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import cybercat5555.faunus.FaunusEntities;
+import cybercat5555.faunus.util.FaunusID;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.Brain;
-import net.minecraft.entity.attribute.AttributeContainer;
+import net.minecraft.entity.ai.brain.task.BreedTask;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -28,6 +32,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.FleeTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.move.FollowEntity;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
@@ -35,6 +40,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTar
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
+import net.tslat.smartbrainlib.api.core.sensor.vanilla.ItemTemptingSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -48,6 +54,8 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOwner<TapirEntity>
 {
+	private static final TagKey<Item> BREED_ITEMS = TagKey.of(RegistryKeys.ITEM, FaunusID.content("tapir_breeding_items"));
+
 	protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("idle");
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
@@ -65,10 +73,9 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 	}
 
 	@Override
-	public PassiveEntity createChild(ServerWorld var1, PassiveEntity var2)
+	public TapirEntity createChild(ServerWorld world, PassiveEntity entity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'createChild'");
+		return FaunusEntities.TAPIR.create(world);
 	}
 
 	@Override
@@ -87,7 +94,8 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 		(
 			new NearbyLivingEntitySensor<>(),
 			new NearbyPlayersSensor<>(),
-			new HurtBySensor<>()
+			new HurtBySensor<>(),
+			new ItemTemptingSensor<>()
 		);
 	}
 
@@ -97,7 +105,9 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 		return BrainActivityGroup.coreTasks
 		(
 			new LookAtTarget<>(),
-			new MoveToWalkTarget<>()
+			new FollowEntity<>(),
+			new MoveToWalkTarget<>(),
+			new BreedTask(FaunusEntities.TAPIR, 1f)
 		);
 	}
 
@@ -125,7 +135,11 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 		return BrainActivityGroup.fightTasks
 		(
 			new InvalidateAttackTarget<>(),
-			new FleeTarget<>()
+			new FirstApplicableBehaviour<TapirEntity>
+			(
+				// new SetAttackTarget<>().attackPredicate(entity -> TapirEntity.)),
+				new FleeTarget<>()
+			)
 		);
 	}
 
@@ -139,8 +153,13 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 	@Override
 	public ActionResult interactMob(PlayerEntity player, Hand hand)
 	{
-		// TODO Auto-generated method stub
 		return super.interactMob(player, hand);
+	}
+
+	@Override
+	public boolean isBreedingItem(ItemStack stack)
+	{
+		return stack.isIn(BREED_ITEMS);
 	}
 
 	@Override
