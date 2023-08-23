@@ -59,7 +59,7 @@ dependencies {
 
 	// smart brain lib
 	modImplementation "net.tslat.smartbrainlib:SmartBrainLib-fabric-${project.minecraft_version}:${project.smart_brain_lib_version}"
-	modImplementation "net.tslat.smartbrainlib:SmartBrainLib-common-${project.minecraft_version}:${project.smart_brain_lib_version}"
+	// modImplementation "net.tslat.smartbrainlib:SmartBrainLib-common-${project.minecraft_version}:${project.smart_brain_lib_version}"
 
 }
 
