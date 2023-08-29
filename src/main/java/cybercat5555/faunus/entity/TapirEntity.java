@@ -8,7 +8,6 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.ai.brain.task.BreedTask;
-import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
@@ -111,6 +110,7 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 		);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public BrainActivityGroup<TapirEntity> getIdleTasks()
 	{
@@ -129,6 +129,7 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 		);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public BrainActivityGroup<TapirEntity> getFightTasks()
 	{
