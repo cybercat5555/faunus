@@ -166,7 +166,7 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 	@Override
 	public AnimatableInstanceCache getAnimatableInstanceCache()
 	{
-		return this.geoCache;
+		return geoCache;
 	}
 
 	@Override
