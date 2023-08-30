@@ -22,11 +22,11 @@ public final class FaunusEntities
 			.build());
 
 	public static final EntityType<PiranhaEntity> PIRANHA = register("piranha", FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, PiranhaEntity::new)
-		.dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+		.dimensions(EntityDimensions.fixed(0.5f, 0.475f))
 		.build());
 
 	public static final EntityType<ArapaimaEntity> ARAPAIMA = register("arapaima", FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, ArapaimaEntity::new)
-		.dimensions(EntityDimensions.fixed(1.2f, 0.5f))
+		.dimensions(EntityDimensions.fixed(1.2f, 0.6f))
 		.build());
 
 	public static void init()
