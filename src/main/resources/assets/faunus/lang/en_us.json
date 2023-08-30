@@ -6,8 +6,10 @@
 	"item.faunus.piranha_spawn_egg": "Piranha Spawn Egg",
 	"item.faunus.piranha": "Raw Piranha",
 	"item.faunus.cooked_piranha": "Cooked Piranha",
+	"item.faunus.piranha_bucket": "Bucket of Piranha",
 	"item.faunus.arapaima_spawn_egg": "Arapaima Spawn Egg",
 	"item.faunus.arapaima": "Raw Arapaima",
 	"item.faunus.cooked_arapaima": "Arapaima Filet",
-	"item.faunus.arapaima_scale": "Arapaima Scale"
+	"item.faunus.arapaima_scale": "Arapaima Scale",
+	"item.faunus.arapaima_bucket": "Bucket of Arapaima"
 }
