@@ -1,9 +1,9 @@
 package cybercat5555.faunus.entity;
 
+import cybercat5555.faunus.FaunusItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.SchoolingFishEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
@@ -31,7 +31,7 @@ public class PiranhaEntity extends SchoolingFishEntity implements GeoEntity
 	@Override
 	public ItemStack getBucketItem()
 	{
-		return new ItemStack(Items.SALMON);
+		return new ItemStack(FaunusItems.PIRANHA_BUCKET);
 	}
 
 	@Override
