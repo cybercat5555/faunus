@@ -1,0 +1,106 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.crayfish",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "crayfish",
+					"pivot": [0, 2.75, -2],
+					"cubes": [
+						{"origin": [-1.5, 1.75, -4], "size": [3, 3, 3], "pivot": [0, 2.75, -2], "rotation": [30, 0, 0], "uv": [0, 0]},
+						{"origin": [-1.5, 1.75, -2], "size": [3, 3, 3], "inflate": -0.01, "uv": [0, 6]}
+					]
+				},
+				{
+					"name": "lFeeler",
+					"parent": "crayfish",
+					"pivot": [0.75, 3.25, -4],
+					"rotation": [-20, -12.5, 0],
+					"cubes": [
+						{"origin": [0.25, 3.25, -10], "size": [1, 0, 6], "uv": [10, 10]}
+					]
+				},
+				{
+					"name": "rFeeler",
+					"parent": "crayfish",
+					"pivot": [-0.75, 3.25, -4],
+					"rotation": [-20, 12.5, 0],
+					"cubes": [
+						{"origin": [-1.25, 3.25, -10], "size": [1, 0, 6], "uv": [10, 10], "mirror": true}
+					]
+				},
+				{
+					"name": "tail",
+					"parent": "crayfish",
+					"pivot": [0, 3.25, 0.75],
+					"rotation": [-10, 0, 0],
+					"cubes": [
+						{"origin": [-1, 2.25, 0.75], "size": [2, 2, 5], "uv": [0, 12]}
+					]
+				},
+				{
+					"name": "lFin",
+					"parent": "tail",
+					"pivot": [1, 3.25, 2.75],
+					"rotation": [0, 0, 27.5],
+					"cubes": [
+						{"origin": [0, 3.25, -0.25], "size": [4, 0, 8], "uv": [7, 0]}
+					]
+				},
+				{
+					"name": "rFin",
+					"parent": "tail",
+					"pivot": [-1, 3.25, 2.75],
+					"rotation": [0, 0, -27.5],
+					"cubes": [
+						{"origin": [-4, 3.25, -0.25], "size": [4, 0, 8], "uv": [7, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "lClaw",
+					"parent": "crayfish",
+					"pivot": [1, 2.25, -4],
+					"rotation": [0, 5, 0],
+					"cubes": [
+						{"origin": [0.75, 2.25, -9], "size": [5, 0, 6], "uv": [-6, 26]}
+					]
+				},
+				{
+					"name": "rClaw",
+					"parent": "crayfish",
+					"pivot": [-1, 2.25, -4],
+					"rotation": [0, -5, 0],
+					"cubes": [
+						{"origin": [-5.75, 2.25, -9], "size": [5, 0, 6], "uv": [-6, 26], "mirror": true}
+					]
+				},
+				{
+					"name": "lLegs",
+					"parent": "crayfish",
+					"pivot": [1, 2.5, -2],
+					"rotation": [0, 0, 32.5],
+					"cubes": [
+						{"origin": [1, 2.5, -4], "size": [5, 0, 5], "uv": [-4, 20]}
+					]
+				},
+				{
+					"name": "rLegs",
+					"parent": "crayfish",
+					"pivot": [-1, 2.5, -2],
+					"rotation": [0, 0, -32.5],
+					"cubes": [
+						{"origin": [-6, 2.5, -4], "size": [5, 0, 5], "uv": [-4, 20], "mirror": true}
+					]
+				}
+			]
+		}
+	]
+}

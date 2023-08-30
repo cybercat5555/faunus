@@ -1,0 +1,162 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.quetzal",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 3,
+				"visible_bounds_offset": [0, 0.5, 0]
+			},
+			"bones": [
+				{
+					"name": "quetzal",
+					"pivot": [0, 3.5, 0]
+				},
+				{
+					"name": "head",
+					"parent": "quetzal",
+					"pivot": [0, 7.30133, 0.21684],
+					"cubes": [
+						{"origin": [-1.5, 7.30133, -1.28316], "size": [3, 3, 3], "uv": [18, 0]},
+						{"origin": [0, 7.30133, -1.28316], "size": [0, 5, 5], "uv": [16, 1]}
+					]
+				},
+				{
+					"name": "beak",
+					"parent": "head",
+					"pivot": [0.25, 7.80133, -1.28316],
+					"cubes": [
+						{"origin": [-0.5, 7.9, -2.28316], "size": [1, 1, 1], "uv": [13, 0]}
+					]
+				},
+				{
+					"name": "lowerBody",
+					"parent": "quetzal",
+					"pivot": [0, 4.05133, 0.21684],
+					"rotation": [7.5, 0, 0],
+					"cubes": [
+						{"origin": [-1.5, 1.05133, -1.03316], "size": [3, 3, 3], "uv": [0, 8]}
+					]
+				},
+				{
+					"name": "tail",
+					"parent": "lowerBody",
+					"pivot": [0, 4.05133, 1.21684],
+					"rotation": [15, 0, 0],
+					"cubes": [
+						{"origin": [-2, -1.09645, 0.19039], "size": [4, 5, 2], "inflate": -0.01, "uv": [8, 17]}
+					]
+				},
+				{
+					"name": "lTailFeather",
+					"parent": "tail",
+					"pivot": [1, 2.15355, 2.44039],
+					"rotation": [0, 2.5, -10],
+					"cubes": [
+						{"origin": [-0.75, -11.84645, 2.19039], "size": [3, 16, 0], "uv": [26, 6]}
+					]
+				},
+				{
+					"name": "rTailFeather",
+					"parent": "tail",
+					"pivot": [-1, 2.15355, 2.44039],
+					"rotation": [0, -2.5, 10],
+					"cubes": [
+						{"origin": [-2.25, -11.84645, 2.19039], "size": [3, 16, 0], "uv": [26, 6], "mirror": true}
+					]
+				},
+				{
+					"name": "lLeg",
+					"parent": "quetzal",
+					"pivot": [1, 3.75, 0.5],
+					"cubes": [
+						{"origin": [0, -0.15, -0.5], "size": [2, 4, 2], "inflate": -0.1, "uv": [0, 14]}
+					]
+				},
+				{
+					"name": "rLeg",
+					"parent": "quetzal",
+					"pivot": [-1, 3.75, 0.5],
+					"cubes": [
+						{"origin": [-2, -0.15, -0.5], "size": [2, 4, 2], "inflate": -0.1, "uv": [0, 14], "mirror": true}
+					]
+				},
+				{
+					"name": "lWing01",
+					"parent": "quetzal",
+					"pivot": [1.75, 6.5, 1],
+					"cubes": [
+						{"origin": [2, 5.5, 0], "size": [3, 2, 1], "uv": [8, 14]}
+					]
+				},
+				{
+					"name": "lWing02",
+					"parent": "lWing01",
+					"pivot": [5, 6.5, 0.5],
+					"cubes": [
+						{"origin": [5, 5.5, 0], "size": [4, 2, 1], "uv": [16, 14]}
+					]
+				},
+				{
+					"name": "lWingFeathers02",
+					"parent": "lWing02",
+					"pivot": [6, 5.5, 1],
+					"cubes": [
+						{"origin": [5, 0.5, 0.5], "size": [13, 7, 0], "uv": [6, 24]}
+					]
+				},
+				{
+					"name": "lWingFeathers01",
+					"parent": "lWing01",
+					"pivot": [3, 5.5, 1],
+					"cubes": [
+						{"origin": [2, 0.5, 0.5], "size": [3, 7, 0], "uv": [0, 24]}
+					]
+				},
+				{
+					"name": "rWing01",
+					"parent": "quetzal",
+					"pivot": [-1.75, 6.5, 1],
+					"cubes": [
+						{"origin": [-5, 5.5, 0], "size": [3, 2, 1], "uv": [8, 14], "mirror": true}
+					]
+				},
+				{
+					"name": "rWing02",
+					"parent": "rWing01",
+					"pivot": [-5, 6.5, 0.5],
+					"cubes": [
+						{"origin": [-9, 5.5, 0], "size": [4, 2, 1], "uv": [16, 14], "mirror": true}
+					]
+				},
+				{
+					"name": "rWingFeathers01",
+					"parent": "rWing02",
+					"pivot": [-6, 5.5, 1],
+					"cubes": [
+						{"origin": [-18, 0.5, 0.5], "size": [13, 7, 0], "uv": [6, 24], "mirror": true}
+					]
+				},
+				{
+					"name": "rWingFeathers02",
+					"parent": "rWing01",
+					"pivot": [-3, 5.5, 1],
+					"cubes": [
+						{"origin": [-5, 0.5, 0.5], "size": [3, 7, 0], "uv": [0, 24], "mirror": true}
+					]
+				},
+				{
+					"name": "breathingrig",
+					"parent": "quetzal",
+					"pivot": [0, 3.5, 0],
+					"cubes": [
+						{"origin": [-2, 3.55133, -1.78316], "size": [4, 4, 4], "uv": [0, 0]}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,66 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.leech",
+				"texture_width": 16,
+				"texture_height": 16,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "leech",
+					"pivot": [0, 0.5, -2]
+				},
+				{
+					"name": "main",
+					"parent": "leech",
+					"pivot": [0, 0.5, -2]
+				},
+				{
+					"name": "stomach",
+					"parent": "main",
+					"pivot": [0, 0.5, -2],
+					"cubes": [
+						{"origin": [-1.5, -0.5, -4], "size": [3, 2, 5], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "secondaryStomach",
+					"parent": "main",
+					"pivot": [0, 0.5, -2],
+					"cubes": [
+						{"origin": [-1.5, -0.5, -4], "size": [3, 2, 5], "inflate": -0.1, "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "head",
+					"parent": "main",
+					"pivot": [0, 0.5, -4],
+					"cubes": [
+						{"origin": [-1, -0.5, -6], "size": [2, 2, 2], "uv": [8, 10]}
+					]
+				},
+				{
+					"name": "tail",
+					"parent": "main",
+					"pivot": [0, 0.5, 1],
+					"cubes": [
+						{"origin": [-1, -0.5, 1], "size": [2, 2, 3], "uv": [0, 11]}
+					]
+				},
+				{
+					"name": "tailTip",
+					"parent": "tail",
+					"pivot": [0, 0.5, 4],
+					"cubes": [
+						{"origin": [-1, 0, 4], "size": [2, 1, 3], "uv": [0, 7]}
+					]
+				}
+			]
+		}
+	]
+}
