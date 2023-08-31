@@ -1,7 +1,9 @@
 package cybercat5555.faunus;
 
 import cybercat5555.faunus.entity.ArapaimaEntityRenderer;
+import cybercat5555.faunus.entity.CapuchinEntityRenderer;
 import cybercat5555.faunus.entity.PiranhaEntityRenderer;
+import cybercat5555.faunus.entity.QuetzalEntityRenderer;
 import cybercat5555.faunus.entity.TapirEntityRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 
@@ -11,7 +13,9 @@ public final class FaunusEntityRenderers
 
 	public static void init()
 	{
+		EntityRendererRegistry.register(FaunusEntities.CAPUCHIN, context -> new CapuchinEntityRenderer(context));
 		EntityRendererRegistry.register(FaunusEntities.TAPIR, context -> new TapirEntityRenderer(context));
+		EntityRendererRegistry.register(FaunusEntities.QUETZAL, context -> new QuetzalEntityRenderer(context));
 		EntityRendererRegistry.register(FaunusEntities.PIRANHA, context -> new PiranhaEntityRenderer(context));
 		EntityRendererRegistry.register(FaunusEntities.ARAPAIMA, context -> new ArapaimaEntityRenderer(context));
 	}

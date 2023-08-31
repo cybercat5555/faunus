@@ -1,7 +1,9 @@
 package cybercat5555.faunus;
 
 import cybercat5555.faunus.entity.ArapaimaEntity;
+import cybercat5555.faunus.entity.CapuchinEntity;
 import cybercat5555.faunus.entity.PiranhaEntity;
+import cybercat5555.faunus.entity.QuetzalEntity;
 import cybercat5555.faunus.entity.TapirEntity;
 import cybercat5555.faunus.util.FaunusID;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -17,21 +19,34 @@ public final class FaunusEntities
 {
 	private FaunusEntities() {}
 
+	//-- Jungles ---------------------------------------------------------------
+	public static EntityType<CapuchinEntity> CAPUCHIN = register("capuchin", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, CapuchinEntity::new)
+		.dimensions(EntityDimensions.fixed(1f, 0.8f))
+		.build());
+
 	public static final EntityType<TapirEntity> TAPIR = register("tapir", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TapirEntity::new)
-			.dimensions(EntityDimensions.fixed(0.9f, 1.4f))
-			.build());
+		.dimensions(EntityDimensions.fixed(0.9f, 1.4f))
+		.build());
+
+	public static final EntityType<QuetzalEntity> QUETZAL = register("quetzal", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, QuetzalEntity::new)
+		.dimensions(EntityDimensions.fixed(0.5f, 0.65f))
+		.build());
 
 	public static final EntityType<PiranhaEntity> PIRANHA = register("piranha", FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, PiranhaEntity::new)
 		.dimensions(EntityDimensions.fixed(0.5f, 0.475f))
 		.build());
 
+	//-- Swamps ----------------------------------------------------------------
 	public static final EntityType<ArapaimaEntity> ARAPAIMA = register("arapaima", FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, ArapaimaEntity::new)
 		.dimensions(EntityDimensions.fixed(1.2f, 0.6f))
 		.build());
+		
 
 	public static void init()
 	{
+		FabricDefaultAttributeRegistry.register(CAPUCHIN, CapuchinEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(TAPIR, TapirEntity.createMobAttributes());
+		FabricDefaultAttributeRegistry.register(QUETZAL, QuetzalEntity.createParrotAttributes());
 		FabricDefaultAttributeRegistry.register(PIRANHA, PiranhaEntity.createFishAttributes());
 		FabricDefaultAttributeRegistry.register(ARAPAIMA, ArapaimaEntity.createFishAttributes());
 	}

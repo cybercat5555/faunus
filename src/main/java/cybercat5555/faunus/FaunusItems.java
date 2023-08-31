@@ -20,9 +20,11 @@ public final class FaunusItems
 {
 	private FaunusItems() {}
 
+	public static final Item CAPUCHIN_SPAWN_EGG = new SpawnEggItem(FaunusEntities.CAPUCHIN, 0x302005, 0xeeddbb, new FabricItemSettings());
 	public static final Item TAPIR_SPAWN_EGG = new SpawnEggItem(FaunusEntities.TAPIR, 0xa09010, 0x60400a, new FabricItemSettings());
 	public static final Item TAPIR_MEAT = new Item(new FabricItemSettings().food(FaunusFoodComponents.TAPIR_MEAT));
 	public static final Item COOKED_TAPIR_MEAT = new Item(new FabricItemSettings().food(FaunusFoodComponents.COOKED_TAPIR_MEAT));
+	public static final Item QUETZAL_SPAWN_EGG = new SpawnEggItem(FaunusEntities.QUETZAL, 0x10bb8f, 0x80053d, new FabricItemSettings());
 	public static final Item PIRANHA_SPAWN_EGG = new SpawnEggItem(FaunusEntities.PIRANHA, 0x303030, 0xbb1020, new FabricItemSettings());
 	public static final Item PIRANHA = new Item(new FabricItemSettings().food(FaunusFoodComponents.PIRANHA));
 	public static final Item COOKED_PIRANHA = new Item(new FabricItemSettings().food(FaunusFoodComponents.COOKED_PIRANHA));
@@ -44,9 +46,11 @@ public final class FaunusItems
 		entries.add(COOKED_PIRANHA);
 		entries.add(ARAPAIMA);
 		entries.add(COOKED_ARAPAIMA);
-		entries.add(TAPIR_SPAWN_EGG);
 		entries.add(PIRANHA_BUCKET);
 		entries.add(ARAPAIMA_BUCKET);
+		entries.add(CAPUCHIN_SPAWN_EGG);
+		entries.add(TAPIR_SPAWN_EGG);
+		entries.add(QUETZAL_SPAWN_EGG);
 		entries.add(PIRANHA_SPAWN_EGG);
 		entries.add(ARAPAIMA_SPAWN_EGG);
 	})
@@ -54,9 +58,11 @@ public final class FaunusItems
 
 	public static void init()
 	{
+		register("capuchin_spawn_egg", CAPUCHIN_SPAWN_EGG);
 		register("tapir_spawn_egg", TAPIR_SPAWN_EGG);
 		register("tapir_meat", TAPIR_MEAT);
 		register("cooked_tapir_meat", COOKED_TAPIR_MEAT);
+		register("quetzal_spawn_egg", QUETZAL_SPAWN_EGG);
 		register("piranha_spawn_egg", PIRANHA_SPAWN_EGG);
 		register("piranha", PIRANHA);
 		register("cooked_piranha", COOKED_PIRANHA);

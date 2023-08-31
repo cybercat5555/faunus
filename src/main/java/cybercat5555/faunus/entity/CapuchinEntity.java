@@ -1,42 +1,36 @@
 package cybercat5555.faunus.entity;
 
-import cybercat5555.faunus.FaunusItems;
+import cybercat5555.faunus.FaunusEntities;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.passive.SchoolingFishEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class ArapaimaEntity extends SchoolingFishEntity implements GeoEntity
+public class CapuchinEntity extends AnimalEntity implements GeoEntity
 {
 	protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("idle");
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	public ArapaimaEntity(EntityType<? extends SchoolingFishEntity> entityType, World world)
+
+	public CapuchinEntity(EntityType<? extends CapuchinEntity> entityType, World world)
 	{
 		super(entityType, world);
 	}
 
 	@Override
-	public ItemStack getBucketItem()
+	public PassiveEntity createChild(ServerWorld world, PassiveEntity other)
 	{
-		return new ItemStack(FaunusItems.ARAPAIMA_BUCKET);
-	}
-
-	@Override
-	protected SoundEvent getFlopSound()
-	{
-		return SoundEvents.ENTITY_CHICKEN_HURT; // again, why not?
+		return FaunusEntities.CAPUCHIN.create(world);
 	}
 
 	@Override
@@ -51,7 +45,7 @@ public class ArapaimaEntity extends SchoolingFishEntity implements GeoEntity
 		controllers.add(new AnimationController<>(this, "idle", 5, this::idleAnimController));
 	}
 	
-	protected <E extends ArapaimaEntity> PlayState idleAnimController(final AnimationState<E> event)
+	protected <E extends CapuchinEntity> PlayState idleAnimController(final AnimationState<E> event)
 	{
 		return PlayState.CONTINUE;
 	}
