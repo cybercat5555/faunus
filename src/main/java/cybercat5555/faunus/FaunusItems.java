@@ -20,24 +20,41 @@ public final class FaunusItems
 {
 	private FaunusItems() {}
 
+	// Capuchin
 	public static final Item CAPUCHIN_SPAWN_EGG = new SpawnEggItem(FaunusEntities.CAPUCHIN, 0x302005, 0xeeddbb, new FabricItemSettings());
+
+	// Tapir
 	public static final Item TAPIR_SPAWN_EGG = new SpawnEggItem(FaunusEntities.TAPIR, 0xa09010, 0x60400a, new FabricItemSettings());
 	public static final Item TAPIR_MEAT = new Item(new FabricItemSettings().food(FaunusFoodComponents.TAPIR_MEAT));
 	public static final Item COOKED_TAPIR_MEAT = new Item(new FabricItemSettings().food(FaunusFoodComponents.COOKED_TAPIR_MEAT));
+
+	// Quetzal
 	public static final Item QUETZAL_SPAWN_EGG = new SpawnEggItem(FaunusEntities.QUETZAL, 0x10cb6f, 0x800528, new FabricItemSettings());
 	public static final Item QUETZAL_FEATHER = new Item(new FabricItemSettings());
+
+	// Hoatzin
 	public static final Item HOATZIN_SPAWN_EGG = new SpawnEggItem(FaunusEntities.HOATZIN, 0xe0a040, 0x40a0e0, new FabricItemSettings());
 	public static final Item HOATZIN_FEATHER = new Item(new FabricItemSettings());
+
+	// Piranha
 	public static final Item PIRANHA_SPAWN_EGG = new SpawnEggItem(FaunusEntities.PIRANHA, 0x303030, 0xbb1020, new FabricItemSettings());
 	public static final Item PIRANHA = new Item(new FabricItemSettings().food(FaunusFoodComponents.PIRANHA));
 	public static final Item COOKED_PIRANHA = new Item(new FabricItemSettings().food(FaunusFoodComponents.COOKED_PIRANHA));
 	public static final Item PIRANHA_BUCKET = new EntityBucketItem(FaunusEntities.PIRANHA, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_FISH, new FabricItemSettings().recipeRemainder(Items.BUCKET));
+
+	// Arapaima
 	public static final Item ARAPAIMA_SPAWN_EGG = new SpawnEggItem(FaunusEntities.ARAPAIMA, 0x80a080, 0xee3030, new FabricItemSettings());
 	public static final Item ARAPAIMA = new Item(new FabricItemSettings().food(FaunusFoodComponents.ARAPAIMA));
 	public static final Item COOKED_ARAPAIMA = new Item(new FabricItemSettings().food(FaunusFoodComponents.COOKED_ARAPAIMA));
 	public static final Item ARAPAIMA_SCALE = new Item(new FabricItemSettings().rarity(Rarity.RARE));
 	public static final Item ARAPAIMA_BUCKET = new EntityBucketItem(FaunusEntities.ARAPAIMA, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_FISH, new FabricItemSettings().recipeRemainder(Items.BUCKET));
+	
+	// Snapping Turtle
 	public static final Item SNAPPING_TURTLE_SPAWN_EGG = new SpawnEggItem(FaunusEntities.SNAPPING_TURTLE, 0x302010, 0xc0b0a0, new FabricItemSettings());
+	
+	// Crayfish
+	public static final Item CRAYFISH_SPAWN_EGG = new SpawnEggItem(FaunusEntities.CRAYFISH, 0x306040, 0xb08030, new FabricItemSettings());
+	//TODO: crayfish items (for when picked up by player). Figure out how to use entity model for item
 
 	private static final ItemGroup GROUP = FabricItemGroup.builder()
 		.icon(() -> new ItemStack(QUETZAL_FEATHER))
@@ -66,6 +83,7 @@ public final class FaunusItems
 			entries.add(PIRANHA_SPAWN_EGG);
 			entries.add(ARAPAIMA_SPAWN_EGG);
 			entries.add(SNAPPING_TURTLE_SPAWN_EGG);
+			entries.add(CRAYFISH_SPAWN_EGG);
 		})
 		.build();
 
@@ -89,6 +107,7 @@ public final class FaunusItems
 		register("arapaima_scale", ARAPAIMA_SCALE);
 		register("arapaima_bucket", ARAPAIMA_BUCKET);
 		register("snapping_turtle_spawn_egg", SNAPPING_TURTLE_SPAWN_EGG);
+		register("crayfish_spawn_egg", CRAYFISH_SPAWN_EGG);
 
 		Registry.register(Registries.ITEM_GROUP, FaunusID.content("item_group"), GROUP);
 	}

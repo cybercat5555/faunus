@@ -2,6 +2,7 @@ package cybercat5555.faunus;
 
 import cybercat5555.faunus.entity.ArapaimaEntity;
 import cybercat5555.faunus.entity.CapuchinEntity;
+import cybercat5555.faunus.entity.CrayfishEntity;
 import cybercat5555.faunus.entity.HoatzinEntity;
 import cybercat5555.faunus.entity.PiranhaEntity;
 import cybercat5555.faunus.entity.QuetzalEntity;
@@ -51,6 +52,10 @@ public final class FaunusEntities
 		.dimensions(EntityDimensions.fixed(1f, 0.65f))
 		.build());
 
+	public static final EntityType<CrayfishEntity> CRAYFISH = register("crayfish", FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, CrayfishEntity::new)
+		.dimensions(EntityDimensions.fixed(0.95f, 0.25f))
+		.build());
+
 	public static void init()
 	{
 		FabricDefaultAttributeRegistry.register(CAPUCHIN, CapuchinEntity.createMobAttributes());
@@ -60,6 +65,7 @@ public final class FaunusEntities
 		FabricDefaultAttributeRegistry.register(PIRANHA, PiranhaEntity.createFishAttributes());
 		FabricDefaultAttributeRegistry.register(ARAPAIMA, ArapaimaEntity.createFishAttributes());
 		FabricDefaultAttributeRegistry.register(SNAPPING_TURTLE, SnappingTurtleEntity.createTurtleAttributes());
+		FabricDefaultAttributeRegistry.register(CRAYFISH, CrayfishEntity.createMobAttributes());
 	}
 
 	private static <T extends Entity> EntityType<T> register(String name, EntityType<T> type)

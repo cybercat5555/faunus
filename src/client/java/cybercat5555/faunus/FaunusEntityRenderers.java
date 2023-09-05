@@ -2,6 +2,7 @@ package cybercat5555.faunus;
 
 import cybercat5555.faunus.entity.ArapaimaEntityRenderer;
 import cybercat5555.faunus.entity.CapuchinEntityRenderer;
+import cybercat5555.faunus.entity.CrayfishEntityRenderer;
 import cybercat5555.faunus.entity.HoatzinEntityRenderer;
 import cybercat5555.faunus.entity.PiranhaEntityRenderer;
 import cybercat5555.faunus.entity.QuetzalEntityRenderer;
@@ -22,5 +23,6 @@ public final class FaunusEntityRenderers
 		EntityRendererRegistry.register(FaunusEntities.PIRANHA, context -> new PiranhaEntityRenderer(context));
 		EntityRendererRegistry.register(FaunusEntities.ARAPAIMA, context -> new ArapaimaEntityRenderer(context));
 		EntityRendererRegistry.register(FaunusEntities.SNAPPING_TURTLE, context -> new SnappingTurtleEntityRenderer(context));
+		EntityRendererRegistry.register(FaunusEntities.CRAYFISH, context -> new CrayfishEntityRenderer(context));
 	}
 }
