@@ -6,6 +6,8 @@
 	"item.faunus.cooked_tapir_meat": "Tapir Steak",
 	"item.faunus.quetzal_spawn_egg": "Quetzal Spawn Egg",
 	"item.faunus.quetzal_feather": "Quetzal Feather",
+	"item.faunus.hoatzin_spawn_egg": "Hoatzin Spawn Egg",
+	"item.faunus.hoatzin_feather": "Hoatzin Feather",
 	"item.faunus.piranha_spawn_egg": "Piranha Spawn Egg",
 	"item.faunus.piranha": "Raw Piranha",
 	"item.faunus.cooked_piranha": "Cooked Piranha",
@@ -14,5 +16,6 @@
 	"item.faunus.arapaima": "Raw Arapaima",
 	"item.faunus.cooked_arapaima": "Arapaima Filet",
 	"item.faunus.arapaima_scale": "Arapaima Scale",
-	"item.faunus.arapaima_bucket": "Bucket of Arapaima"
+	"item.faunus.arapaima_bucket": "Bucket of Arapaima",
+	"item.faunus.snapping_turtle_spawn_egg": "Alligator Snapping Turtle Spawn Egg"
 }

@@ -2,8 +2,10 @@ package cybercat5555.faunus;
 
 import cybercat5555.faunus.entity.ArapaimaEntity;
 import cybercat5555.faunus.entity.CapuchinEntity;
+import cybercat5555.faunus.entity.HoatzinEntity;
 import cybercat5555.faunus.entity.PiranhaEntity;
 import cybercat5555.faunus.entity.QuetzalEntity;
+import cybercat5555.faunus.entity.SnappingTurtleEntity;
 import cybercat5555.faunus.entity.TapirEntity;
 import cybercat5555.faunus.util.FaunusID;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -32,6 +34,10 @@ public final class FaunusEntities
 		.dimensions(EntityDimensions.fixed(0.5f, 0.65f))
 		.build());
 
+	public static final EntityType<HoatzinEntity> HOATZIN = register("hoatzin", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, HoatzinEntity::new)
+		.dimensions(EntityDimensions.fixed(0.6f, 0.65f))
+		.build());
+
 	public static final EntityType<PiranhaEntity> PIRANHA = register("piranha", FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, PiranhaEntity::new)
 		.dimensions(EntityDimensions.fixed(0.5f, 0.475f))
 		.build());
@@ -41,14 +47,19 @@ public final class FaunusEntities
 		.dimensions(EntityDimensions.fixed(1.2f, 0.6f))
 		.build());
 		
+	public static final EntityType<SnappingTurtleEntity> SNAPPING_TURTLE = register("snapping_turtle", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, SnappingTurtleEntity::new)
+		.dimensions(EntityDimensions.fixed(1f, 0.65f))
+		.build());
 
 	public static void init()
 	{
 		FabricDefaultAttributeRegistry.register(CAPUCHIN, CapuchinEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(TAPIR, TapirEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(QUETZAL, QuetzalEntity.createParrotAttributes());
+		FabricDefaultAttributeRegistry.register(HOATZIN, HoatzinEntity.createChickenAttributes());
 		FabricDefaultAttributeRegistry.register(PIRANHA, PiranhaEntity.createFishAttributes());
 		FabricDefaultAttributeRegistry.register(ARAPAIMA, ArapaimaEntity.createFishAttributes());
+		FabricDefaultAttributeRegistry.register(SNAPPING_TURTLE, SnappingTurtleEntity.createTurtleAttributes());
 	}
 
 	private static <T extends Entity> EntityType<T> register(String name, EntityType<T> type)

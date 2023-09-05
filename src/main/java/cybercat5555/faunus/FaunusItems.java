@@ -26,6 +26,8 @@ public final class FaunusItems
 	public static final Item COOKED_TAPIR_MEAT = new Item(new FabricItemSettings().food(FaunusFoodComponents.COOKED_TAPIR_MEAT));
 	public static final Item QUETZAL_SPAWN_EGG = new SpawnEggItem(FaunusEntities.QUETZAL, 0x10cb6f, 0x800528, new FabricItemSettings());
 	public static final Item QUETZAL_FEATHER = new Item(new FabricItemSettings());
+	public static final Item HOATZIN_SPAWN_EGG = new SpawnEggItem(FaunusEntities.HOATZIN, 0xe0a040, 0x40a0e0, new FabricItemSettings());
+	public static final Item HOATZIN_FEATHER = new Item(new FabricItemSettings());
 	public static final Item PIRANHA_SPAWN_EGG = new SpawnEggItem(FaunusEntities.PIRANHA, 0x303030, 0xbb1020, new FabricItemSettings());
 	public static final Item PIRANHA = new Item(new FabricItemSettings().food(FaunusFoodComponents.PIRANHA));
 	public static final Item COOKED_PIRANHA = new Item(new FabricItemSettings().food(FaunusFoodComponents.COOKED_PIRANHA));
@@ -35,33 +37,37 @@ public final class FaunusItems
 	public static final Item COOKED_ARAPAIMA = new Item(new FabricItemSettings().food(FaunusFoodComponents.COOKED_ARAPAIMA));
 	public static final Item ARAPAIMA_SCALE = new Item(new FabricItemSettings().rarity(Rarity.RARE));
 	public static final Item ARAPAIMA_BUCKET = new EntityBucketItem(FaunusEntities.ARAPAIMA, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_FISH, new FabricItemSettings().recipeRemainder(Items.BUCKET));
+	public static final Item SNAPPING_TURTLE_SPAWN_EGG = new SpawnEggItem(FaunusEntities.SNAPPING_TURTLE, 0x302010, 0xc0b0a0, new FabricItemSettings());
 
 	private static final ItemGroup GROUP = FabricItemGroup.builder()
-	.icon(() -> new ItemStack(QUETZAL_FEATHER))
-	.displayName(Text.translatable("itemGroup.faunus.item_group"))
-	.entries((context, entries) ->
-	{
-		// misc
-		entries.add(QUETZAL_FEATHER);
-		entries.add(ARAPAIMA_SCALE);
-		// food
-		entries.add(TAPIR_MEAT);
-		entries.add(COOKED_TAPIR_MEAT);
-		entries.add(PIRANHA);
-		entries.add(COOKED_PIRANHA);
-		entries.add(ARAPAIMA);
-		entries.add(COOKED_ARAPAIMA);
-		// buckets
-		entries.add(PIRANHA_BUCKET);
-		entries.add(ARAPAIMA_BUCKET);
-		// spawn eggs
-		entries.add(CAPUCHIN_SPAWN_EGG);
-		entries.add(TAPIR_SPAWN_EGG);
-		entries.add(QUETZAL_SPAWN_EGG);
-		entries.add(PIRANHA_SPAWN_EGG);
-		entries.add(ARAPAIMA_SPAWN_EGG);
-	})
-	.build();
+		.icon(() -> new ItemStack(QUETZAL_FEATHER))
+		.displayName(Text.translatable("itemGroup.faunus.item_group"))
+		.entries((context, entries) ->
+		{
+			// misc
+			entries.add(QUETZAL_FEATHER);
+			entries.add(HOATZIN_FEATHER);
+			entries.add(ARAPAIMA_SCALE);
+			// food
+			entries.add(TAPIR_MEAT);
+			entries.add(COOKED_TAPIR_MEAT);
+			entries.add(PIRANHA);
+			entries.add(COOKED_PIRANHA);
+			entries.add(ARAPAIMA);
+			entries.add(COOKED_ARAPAIMA);
+			// buckets
+			entries.add(PIRANHA_BUCKET);
+			entries.add(ARAPAIMA_BUCKET);
+			// spawn eggs
+			entries.add(CAPUCHIN_SPAWN_EGG);
+			entries.add(TAPIR_SPAWN_EGG);
+			entries.add(QUETZAL_SPAWN_EGG);
+			entries.add(HOATZIN_SPAWN_EGG);
+			entries.add(PIRANHA_SPAWN_EGG);
+			entries.add(ARAPAIMA_SPAWN_EGG);
+			entries.add(SNAPPING_TURTLE_SPAWN_EGG);
+		})
+		.build();
 
 	public static void init()
 	{
@@ -71,6 +77,8 @@ public final class FaunusItems
 		register("cooked_tapir_meat", COOKED_TAPIR_MEAT);
 		register("quetzal_spawn_egg", QUETZAL_SPAWN_EGG);
 		register("quetzal_feather", QUETZAL_FEATHER);
+		register("hoatzin_spawn_egg", HOATZIN_SPAWN_EGG);
+		register("hoatzin_feather", HOATZIN_FEATHER);
 		register("piranha_spawn_egg", PIRANHA_SPAWN_EGG);
 		register("piranha", PIRANHA);
 		register("cooked_piranha", COOKED_PIRANHA);
@@ -80,6 +88,7 @@ public final class FaunusItems
 		register("cooked_arapaima", COOKED_ARAPAIMA);
 		register("arapaima_scale", ARAPAIMA_SCALE);
 		register("arapaima_bucket", ARAPAIMA_BUCKET);
+		register("snapping_turtle_spawn_egg", SNAPPING_TURTLE_SPAWN_EGG);
 
 		Registry.register(Registries.ITEM_GROUP, FaunusID.content("item_group"), GROUP);
 	}
