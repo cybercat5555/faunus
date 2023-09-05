@@ -27,6 +27,7 @@ public final class FaunusItems
 	public static final Item TAPIR_SPAWN_EGG = new SpawnEggItem(FaunusEntities.TAPIR, 0xa09010, 0x60400a, new FabricItemSettings());
 	public static final Item TAPIR_MEAT = new Item(new FabricItemSettings().food(FaunusFoodComponents.TAPIR_MEAT));
 	public static final Item COOKED_TAPIR_MEAT = new Item(new FabricItemSettings().food(FaunusFoodComponents.COOKED_TAPIR_MEAT));
+	//TODO: bottled stink
 
 	// Quetzal
 	public static final Item QUETZAL_SPAWN_EGG = new SpawnEggItem(FaunusEntities.QUETZAL, 0x10cb6f, 0x800528, new FabricItemSettings());
@@ -51,10 +52,15 @@ public final class FaunusItems
 	
 	// Snapping Turtle
 	public static final Item SNAPPING_TURTLE_SPAWN_EGG = new SpawnEggItem(FaunusEntities.SNAPPING_TURTLE, 0x302010, 0xc0b0a0, new FabricItemSettings());
-	
+	//TODO: spiky scute
+
 	// Crayfish
-	public static final Item CRAYFISH_SPAWN_EGG = new SpawnEggItem(FaunusEntities.CRAYFISH, 0x306040, 0xb08030, new FabricItemSettings());
+	public static final Item CRAYFISH_SPAWN_EGG = new SpawnEggItem(FaunusEntities.CRAYFISH, 0xa0b030, 0xf0e030, new FabricItemSettings());
 	//TODO: crayfish items (for when picked up by player). Figure out how to use entity model for item
+
+	// Leech
+	public static final Item LEECH_SPAWN_EGG = new SpawnEggItem(FaunusEntities.LEECH, 0x90a015, 0xfafa35, new FabricItemSettings());
+	// TODO: bottled leech
 
 	private static final ItemGroup GROUP = FabricItemGroup.builder()
 		.icon(() -> new ItemStack(QUETZAL_FEATHER))
@@ -84,6 +90,7 @@ public final class FaunusItems
 			entries.add(ARAPAIMA_SPAWN_EGG);
 			entries.add(SNAPPING_TURTLE_SPAWN_EGG);
 			entries.add(CRAYFISH_SPAWN_EGG);
+			entries.add(LEECH_SPAWN_EGG);
 		})
 		.build();
 
@@ -108,6 +115,7 @@ public final class FaunusItems
 		register("arapaima_bucket", ARAPAIMA_BUCKET);
 		register("snapping_turtle_spawn_egg", SNAPPING_TURTLE_SPAWN_EGG);
 		register("crayfish_spawn_egg", CRAYFISH_SPAWN_EGG);
+		register("leech_spawn_egg", LEECH_SPAWN_EGG);
 
 		Registry.register(Registries.ITEM_GROUP, FaunusID.content("item_group"), GROUP);
 	}
