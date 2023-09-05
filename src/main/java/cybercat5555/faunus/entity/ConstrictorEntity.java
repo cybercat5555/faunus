@@ -8,20 +8,20 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
-import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class CapuchinEntity extends AnimalEntity implements GeoEntity
+public class ConstrictorEntity extends AnimalEntity implements GeoEntity
 {
 	protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("idle");
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	public CapuchinEntity(EntityType<? extends CapuchinEntity> entityType, World world)
+	public ConstrictorEntity(EntityType<? extends AnimalEntity> entityType, World world)
 	{
 		super(entityType, world);
 	}
@@ -29,9 +29,9 @@ public class CapuchinEntity extends AnimalEntity implements GeoEntity
 	@Override
 	public PassiveEntity createChild(ServerWorld world, PassiveEntity other)
 	{
-		return FaunusEntities.CAPUCHIN.create(world);
+		return FaunusEntities.CONSTRICTOR.create(world);
 	}
-
+	
 	@Override
 	public AnimatableInstanceCache getAnimatableInstanceCache()
 	{
@@ -43,8 +43,8 @@ public class CapuchinEntity extends AnimalEntity implements GeoEntity
 	{
 		controllers.add(new AnimationController<>(this, "idle", 5, this::idleAnimController));
 	}
-	
-	protected <E extends CapuchinEntity> PlayState idleAnimController(final AnimationState<E> event)
+
+	protected <E extends ConstrictorEntity> PlayState idleAnimController(final AnimationState<E> event)
 	{
 		return PlayState.CONTINUE;
 	}

@@ -2,6 +2,7 @@ package cybercat5555.faunus;
 
 import cybercat5555.faunus.entity.ArapaimaEntity;
 import cybercat5555.faunus.entity.CapuchinEntity;
+import cybercat5555.faunus.entity.ConstrictorEntity;
 import cybercat5555.faunus.entity.CrayfishEntity;
 import cybercat5555.faunus.entity.HoatzinEntity;
 import cybercat5555.faunus.entity.LeechEntity;
@@ -31,6 +32,10 @@ public final class FaunusEntities
 
 	public static final EntityType<TapirEntity> TAPIR = register("tapir", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TapirEntity::new)
 		.dimensions(EntityDimensions.fixed(0.9f, 1.4f))
+		.build());
+
+	public static final EntityType<ConstrictorEntity> CONSTRICTOR = register("constrictor", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ConstrictorEntity::new)
+		.dimensions(EntityDimensions.fixed(1.5f, 0.25f))
 		.build());
 
 	public static final EntityType<QuetzalEntity> QUETZAL = register("quetzal", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, QuetzalEntity::new)
@@ -70,6 +75,7 @@ public final class FaunusEntities
 	{
 		FabricDefaultAttributeRegistry.register(CAPUCHIN, CapuchinEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(TAPIR, TapirEntity.createMobAttributes());
+		FabricDefaultAttributeRegistry.register(CONSTRICTOR, ConstrictorEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(QUETZAL, QuetzalEntity.createParrotAttributes());
 		FabricDefaultAttributeRegistry.register(HOATZIN, HoatzinEntity.createChickenAttributes());
 		FabricDefaultAttributeRegistry.register(PIRANHA, PiranhaEntity.createFishAttributes());

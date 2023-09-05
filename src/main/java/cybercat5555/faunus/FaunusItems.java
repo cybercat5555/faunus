@@ -29,6 +29,9 @@ public final class FaunusItems
 	public static final Item COOKED_TAPIR_MEAT = new Item(new FabricItemSettings().food(FaunusFoodComponents.COOKED_TAPIR_MEAT));
 	//TODO: bottled stink
 
+	// Constrictor
+	public static final Item CONSTRICTOR_SPAWN_EGG = new SpawnEggItem(FaunusEntities.CONSTRICTOR, 0x30a050, 0x101010, new FabricItemSettings());
+
 	// Quetzal
 	public static final Item QUETZAL_SPAWN_EGG = new SpawnEggItem(FaunusEntities.QUETZAL, 0x10cb6f, 0x800528, new FabricItemSettings());
 	public static final Item QUETZAL_FEATHER = new Item(new FabricItemSettings());
@@ -87,6 +90,7 @@ public final class FaunusItems
 			// spawn eggs
 			entries.add(CAPUCHIN_SPAWN_EGG);
 			entries.add(TAPIR_SPAWN_EGG);
+			entries.add(CONSTRICTOR_SPAWN_EGG);
 			entries.add(QUETZAL_SPAWN_EGG);
 			entries.add(HOATZIN_SPAWN_EGG);
 			entries.add(PIRANHA_SPAWN_EGG);
@@ -104,6 +108,7 @@ public final class FaunusItems
 		register("tapir_spawn_egg", TAPIR_SPAWN_EGG);
 		register("tapir_meat", TAPIR_MEAT);
 		register("cooked_tapir_meat", COOKED_TAPIR_MEAT);
+		register("constrictor_spawn_egg", CONSTRICTOR_SPAWN_EGG);
 		register("quetzal_spawn_egg", QUETZAL_SPAWN_EGG);
 		register("quetzal_feather", QUETZAL_FEATHER);
 		register("hoatzin_spawn_egg", HOATZIN_SPAWN_EGG);
