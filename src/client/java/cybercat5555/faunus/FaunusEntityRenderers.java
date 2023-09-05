@@ -9,6 +9,7 @@ import cybercat5555.faunus.entity.PiranhaEntityRenderer;
 import cybercat5555.faunus.entity.QuetzalEntityRenderer;
 import cybercat5555.faunus.entity.SnappingTurtleEntityRenderer;
 import cybercat5555.faunus.entity.TapirEntityRenderer;
+import cybercat5555.faunus.entity.YacareEntityRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 
 public final class FaunusEntityRenderers
@@ -26,5 +27,6 @@ public final class FaunusEntityRenderers
 		EntityRendererRegistry.register(FaunusEntities.SNAPPING_TURTLE, context -> new SnappingTurtleEntityRenderer(context));
 		EntityRendererRegistry.register(FaunusEntities.CRAYFISH, context -> new CrayfishEntityRenderer(context));
 		EntityRendererRegistry.register(FaunusEntities.LEECH, context -> new LeechEntityRenderer(context));
+		EntityRendererRegistry.register(FaunusEntities.YACARE, context -> new YacareEntityRenderer(context));
 	}
 }

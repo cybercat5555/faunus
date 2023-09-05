@@ -9,6 +9,7 @@ import cybercat5555.faunus.entity.PiranhaEntity;
 import cybercat5555.faunus.entity.QuetzalEntity;
 import cybercat5555.faunus.entity.SnappingTurtleEntity;
 import cybercat5555.faunus.entity.TapirEntity;
+import cybercat5555.faunus.entity.YacareEntity;
 import cybercat5555.faunus.util.FaunusID;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -61,6 +62,10 @@ public final class FaunusEntities
 		.dimensions(EntityDimensions.fixed(0.35f, 0.15f))
 		.build());
 
+		public static final EntityType<YacareEntity> YACARE = register("yacare", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, YacareEntity::new)
+		.dimensions(EntityDimensions.fixed(2f, 1f))
+		.build());
+
 	public static void init()
 	{
 		FabricDefaultAttributeRegistry.register(CAPUCHIN, CapuchinEntity.createMobAttributes());
@@ -72,6 +77,7 @@ public final class FaunusEntities
 		FabricDefaultAttributeRegistry.register(SNAPPING_TURTLE, SnappingTurtleEntity.createTurtleAttributes());
 		FabricDefaultAttributeRegistry.register(CRAYFISH, CrayfishEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(LEECH, LeechEntity.createMobAttributes());
+		FabricDefaultAttributeRegistry.register(YACARE, YacareEntity.createMobAttributes());
 	}
 
 	private static <T extends Entity> EntityType<T> register(String name, EntityType<T> type)

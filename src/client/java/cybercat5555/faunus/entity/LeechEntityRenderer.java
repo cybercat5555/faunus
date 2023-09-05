@@ -9,6 +9,6 @@ public class LeechEntityRenderer extends GeoEntityRenderer<LeechEntity>
 {
 	public LeechEntityRenderer(Context renderManager)
 	{
-		super(renderManager, new DefaultedEntityGeoModel<LeechEntity>(FaunusID.content("leech"), true));
+		super(renderManager, new DefaultedEntityGeoModel<LeechEntity>(FaunusID.content("leech"), false));
 	}
 }

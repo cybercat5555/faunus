@@ -5,11 +5,10 @@ import net.minecraft.client.render.entity.EntityRendererFactory.Context;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class CrayfishEntityRenderer extends GeoEntityRenderer<CrayfishEntity>
+public class YacareEntityRenderer extends GeoEntityRenderer<YacareEntity>
 {
-	public CrayfishEntityRenderer(Context renderManager)
+	public YacareEntityRenderer(Context renderManager)
 	{
-		super(renderManager, new DefaultedEntityGeoModel<CrayfishEntity>(FaunusID.content("crayfish"), false));
-
+		super(renderManager, new DefaultedEntityGeoModel<YacareEntity>(FaunusID.content("yacare"), true));
 	}
 }

@@ -62,6 +62,9 @@ public final class FaunusItems
 	public static final Item LEECH_SPAWN_EGG = new SpawnEggItem(FaunusEntities.LEECH, 0x90a015, 0xfafa35, new FabricItemSettings());
 	// TODO: bottled leech
 
+	// Yacare
+	public static final Item YACARE_SPAWN_EGG = new SpawnEggItem(FaunusEntities.YACARE, 0x108030, 0x80f0a0, new FabricItemSettings());
+
 	private static final ItemGroup GROUP = FabricItemGroup.builder()
 		.icon(() -> new ItemStack(QUETZAL_FEATHER))
 		.displayName(Text.translatable("itemGroup.faunus.item_group"))
@@ -91,6 +94,7 @@ public final class FaunusItems
 			entries.add(SNAPPING_TURTLE_SPAWN_EGG);
 			entries.add(CRAYFISH_SPAWN_EGG);
 			entries.add(LEECH_SPAWN_EGG);
+			entries.add(YACARE_SPAWN_EGG);
 		})
 		.build();
 
@@ -116,6 +120,7 @@ public final class FaunusItems
 		register("snapping_turtle_spawn_egg", SNAPPING_TURTLE_SPAWN_EGG);
 		register("crayfish_spawn_egg", CRAYFISH_SPAWN_EGG);
 		register("leech_spawn_egg", LEECH_SPAWN_EGG);
+		register("yacare_spawn_egg", YACARE_SPAWN_EGG);
 
 		Registry.register(Registries.ITEM_GROUP, FaunusID.content("item_group"), GROUP);
 	}
