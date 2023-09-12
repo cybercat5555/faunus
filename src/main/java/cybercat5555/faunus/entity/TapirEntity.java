@@ -2,6 +2,7 @@ package cybercat5555.faunus.entity;
 
 import java.util.List;
 
+import cybercat5555.faunus.Faunus;
 import cybercat5555.faunus.FaunusEntities;
 import cybercat5555.faunus.util.FaunusID;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -56,8 +57,18 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 	private static final TagKey<Item> BREED_ITEMS = TagKey.of(RegistryKeys.ITEM, FaunusID.content("tapir_breeding_items"));
 
 	protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("idle");
+	protected static final RawAnimation WALKING_ANIM = RawAnimation.begin().thenLoop("walking");
+	protected static final RawAnimation RUNNING_ANIM = RawAnimation.begin().thenLoop("running");
+	protected static final RawAnimation EAR_TWITCH_ANIM = RawAnimation.begin().thenPlayXTimes("ear twitch", 3);
+	protected static final RawAnimation EAR_TWITCH_ANIM_LEFT = RawAnimation.begin().thenPlayXTimes("ear twitch left", 2);
+	protected static final RawAnimation EAR_TWITCH_ANIM_RIGHT = RawAnimation.begin().thenPlayXTimes("ear twitch right", 2);
+	protected static final RawAnimation SNIFFING_ANIM = RawAnimation.begin().thenPlay("sniffing").thenLoop("idle");
+	protected static final RawAnimation LAYING_DOWN_ANIM = RawAnimation.begin().thenPlayAndHold("laying down").thenWait(999).thenLoop("idle");
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+
+	protected int tempInt = 0;
+	protected EarTwitchMode earMode = EarTwitchMode.NONE;
 
 	public TapirEntity(EntityType<? extends TapirEntity> entityType, World world)
 	{
@@ -124,7 +135,7 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 			new OneRandomBehaviour<TapirEntity>
 			(
 				new SetRandomWalkTarget<>(),
-				new Idle<>().runFor(entity -> entity.getRandom().nextBetween(30, 60))
+				new Idle<>().runFor(entity -> entity.getRandom().nextBetween(60, 600))
 			)
 		);
 	}
@@ -152,6 +163,16 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 	}
 
 	@Override
+	public void tick()
+	{
+		super.tick();
+		if(getWorld().isClient)
+		{
+			tempInt = random.nextInt(1024);
+		}
+	}
+
+	@Override
 	public ActionResult interactMob(PlayerEntity player, Hand hand)
 	{
 		return super.interactMob(player, hand);
@@ -174,11 +195,61 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 	{
 		//TODO: add proper args here for animations
 		controllers.add(new AnimationController<>(this, "idle", 5, this::idleAnimController));
+		controllers.add(new AnimationController<>(this, "ears", 5, this::earAnimController));
 	}
 
-	protected <E extends TapirEntity> PlayState idleAnimController(final AnimationState<E> event)
+	protected <E extends TapirEntity> PlayState idleAnimController(final AnimationState<E> state)
 	{
+		if(state.isMoving())
+		{
+			state.setAndContinue(WALKING_ANIM);
+		}
+		else if(state.isCurrentAnimation(WALKING_ANIM))
+		{
+			state.setAndContinue(IDLE_ANIM);
+		}
+		
+		if(state.isCurrentAnimation(IDLE_ANIM) && tempInt < 5)
+		{
+			state.setAndContinue(LAYING_DOWN_ANIM);
+		}
+
 		return PlayState.CONTINUE;
 	}
 	
+	protected <E extends TapirEntity> PlayState earAnimController(final AnimationState<E> state)
+	{
+		if(state.getController().hasAnimationFinished())
+		{
+			earMode = EarTwitchMode.NONE;
+		}
+
+		if(earMode == EarTwitchMode.NONE)
+		{
+			int rnd = tempInt;
+			if(rnd < 8)
+			{
+				state.setAndContinue(EAR_TWITCH_ANIM);
+				earMode = EarTwitchMode.BOTH;
+				return PlayState.CONTINUE;
+			}
+			else if(rnd < 24)
+			{
+				boolean left = rnd % 2 == 0;
+				state.setAndContinue(left ? EAR_TWITCH_ANIM_LEFT : EAR_TWITCH_ANIM_RIGHT);
+				earMode = left ? EarTwitchMode.LEFT : EarTwitchMode.RIGHT;
+				return PlayState.CONTINUE;
+			}
+		}
+
+		return earMode == EarTwitchMode.NONE ? PlayState.STOP : PlayState.CONTINUE;
+	}
+
+	protected static enum EarTwitchMode
+	{
+		NONE,
+		LEFT,
+		RIGHT,
+		BOTH;
+	}
 }
