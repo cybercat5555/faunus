@@ -200,9 +200,15 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 
 	protected <E extends TapirEntity> PlayState idleAnimController(final AnimationState<E> state)
 	{
-		if(state.isMoving())
+		if(isSubmergedInWater())
 		{
 			state.setAndContinue(WALKING_ANIM);
+			return PlayState.CONTINUE;
+		}
+
+		if(state.isMoving())
+		{
+			state.setAndContinue(isSprinting() ? RUNNING_ANIM : WALKING_ANIM);
 		}
 		else if(state.isCurrentAnimation(WALKING_ANIM))
 		{
