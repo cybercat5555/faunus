@@ -20,6 +20,9 @@ public final class FaunusItems
 {
 	private FaunusItems() {}
 
+	// Songbird
+	public static final Item SONGBIRD_SPAWN_EGG = new SpawnEggItem(FaunusEntities.SONGBIRD, 0xeeeeee, 0xaaaaaa, new FabricItemSettings());
+
 	// Capuchin
 	public static final Item CAPUCHIN_SPAWN_EGG = new SpawnEggItem(FaunusEntities.CAPUCHIN, 0x302005, 0xeeddbb, new FabricItemSettings());
 
@@ -88,6 +91,7 @@ public final class FaunusItems
 			entries.add(PIRANHA_BUCKET);
 			entries.add(ARAPAIMA_BUCKET);
 			// spawn eggs
+			entries.add(SONGBIRD_SPAWN_EGG);
 			entries.add(CAPUCHIN_SPAWN_EGG);
 			entries.add(TAPIR_SPAWN_EGG);
 			entries.add(CONSTRICTOR_SPAWN_EGG);
@@ -104,6 +108,7 @@ public final class FaunusItems
 
 	public static void init()
 	{
+		register("songbird_spawn_egg", SONGBIRD_SPAWN_EGG);
 		register("capuchin_spawn_egg", CAPUCHIN_SPAWN_EGG);
 		register("tapir_spawn_egg", TAPIR_SPAWN_EGG);
 		register("tapir_meat", TAPIR_MEAT);

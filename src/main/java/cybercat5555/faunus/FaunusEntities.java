@@ -9,6 +9,7 @@ import cybercat5555.faunus.entity.LeechEntity;
 import cybercat5555.faunus.entity.PiranhaEntity;
 import cybercat5555.faunus.entity.QuetzalEntity;
 import cybercat5555.faunus.entity.SnappingTurtleEntity;
+import cybercat5555.faunus.entity.SongbirdEntity;
 import cybercat5555.faunus.entity.TapirEntity;
 import cybercat5555.faunus.entity.YacareEntity;
 import cybercat5555.faunus.util.FaunusID;
@@ -24,6 +25,11 @@ import net.minecraft.registry.Registry;
 public final class FaunusEntities
 {
 	private FaunusEntities() {}
+
+	//-- Multiple --------------------------------------------------------------
+	public static EntityType<SongbirdEntity> SONGBIRD = register("songbird", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, SongbirdEntity::new)
+		.dimensions(EntityDimensions.fixed(0.5f, 0.65f))
+		.build());
 
 	//-- Jungles ---------------------------------------------------------------
 	public static EntityType<CapuchinEntity> CAPUCHIN = register("capuchin", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, CapuchinEntity::new)
@@ -73,10 +79,11 @@ public final class FaunusEntities
 
 	public static void init()
 	{
+		FabricDefaultAttributeRegistry.register(SONGBIRD, SongbirdEntity.createSongbirdAttributes());
 		FabricDefaultAttributeRegistry.register(CAPUCHIN, CapuchinEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(TAPIR, TapirEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(CONSTRICTOR, ConstrictorEntity.createMobAttributes());
-		FabricDefaultAttributeRegistry.register(QUETZAL, QuetzalEntity.createParrotAttributes());
+		FabricDefaultAttributeRegistry.register(QUETZAL, QuetzalEntity.createQuetzalAttributes());
 		FabricDefaultAttributeRegistry.register(HOATZIN, HoatzinEntity.createChickenAttributes());
 		FabricDefaultAttributeRegistry.register(PIRANHA, PiranhaEntity.createFishAttributes());
 		FabricDefaultAttributeRegistry.register(ARAPAIMA, ArapaimaEntity.createFishAttributes());

@@ -19,6 +19,9 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 public class ArapaimaEntity extends SchoolingFishEntity implements GeoEntity
 {
 	protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("idle");
+	protected static final RawAnimation SWIM_ANIM = RawAnimation.begin().thenLoop("swimming");
+	protected static final RawAnimation FLOP_ANIM = RawAnimation.begin().thenLoop("flopping");
+	protected static final RawAnimation ATTACK_ANIM = RawAnimation.begin().thenLoop("attack");
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -51,8 +54,21 @@ public class ArapaimaEntity extends SchoolingFishEntity implements GeoEntity
 		controllers.add(new AnimationController<>(this, "idle", 5, this::idleAnimController));
 	}
 	
-	protected <E extends ArapaimaEntity> PlayState idleAnimController(final AnimationState<E> event)
+	protected <E extends ArapaimaEntity> PlayState idleAnimController(final AnimationState<E> state)
 	{
+		if(!isSubmergedInWater())
+		{
+			state.setAndContinue(FLOP_ANIM);
+		}
+		else if(state.isMoving())
+		{
+			state.setAndContinue(SWIM_ANIM);
+		}
+		else
+		{
+			state.setAndContinue(IDLE_ANIM);
+		}
+
 		return PlayState.CONTINUE;
 	}
 }

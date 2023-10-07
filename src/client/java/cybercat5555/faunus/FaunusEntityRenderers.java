@@ -9,6 +9,7 @@ import cybercat5555.faunus.entity.LeechEntityRenderer;
 import cybercat5555.faunus.entity.PiranhaEntityRenderer;
 import cybercat5555.faunus.entity.QuetzalEntityRenderer;
 import cybercat5555.faunus.entity.SnappingTurtleEntityRenderer;
+import cybercat5555.faunus.entity.SongbirdEntityRenderer;
 import cybercat5555.faunus.entity.TapirEntityRenderer;
 import cybercat5555.faunus.entity.YacareEntityRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -19,6 +20,7 @@ public final class FaunusEntityRenderers
 
 	public static void init()
 	{
+		EntityRendererRegistry.register(FaunusEntities.SONGBIRD, context -> new SongbirdEntityRenderer(context));
 		EntityRendererRegistry.register(FaunusEntities.CAPUCHIN, context -> new CapuchinEntityRenderer(context));
 		EntityRendererRegistry.register(FaunusEntities.TAPIR, context -> new TapirEntityRenderer(context));
 		EntityRendererRegistry.register(FaunusEntities.CONSTRICTOR, context -> new ConstrictorEntityRenderer(context));

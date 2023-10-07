@@ -59,11 +59,13 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
 	protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("idle");
 	protected static final RawAnimation WALKING_ANIM = RawAnimation.begin().thenLoop("walking");
 	protected static final RawAnimation RUNNING_ANIM = RawAnimation.begin().thenLoop("running");
-	protected static final RawAnimation EAR_TWITCH_ANIM = RawAnimation.begin().thenPlayXTimes("ear twitch", 3);
-	protected static final RawAnimation EAR_TWITCH_ANIM_LEFT = RawAnimation.begin().thenPlayXTimes("ear twitch left", 2);
-	protected static final RawAnimation EAR_TWITCH_ANIM_RIGHT = RawAnimation.begin().thenPlayXTimes("ear twitch right", 2);
+	protected static final RawAnimation EAR_TWITCH_ANIM = RawAnimation.begin().thenPlayXTimes("ear_twitch_both", 3);
+	protected static final RawAnimation EAR_TWITCH_ANIM_LEFT = RawAnimation.begin().thenPlayXTimes("ear_twitch_left", 2);
+	protected static final RawAnimation EAR_TWITCH_ANIM_RIGHT = RawAnimation.begin().thenPlayXTimes("ear_twitch_right", 2);
+	protected static final RawAnimation EAR_TWITCH_SNIFF_ANIM_RIGHT = RawAnimation.begin().thenPlayXTimes("sniffing_ear_right", 2);
+	protected static final RawAnimation EAR_TWITCH_SNIFF_ANIM_LEFT = RawAnimation.begin().thenPlayXTimes("sniffing_ear_left", 2);
 	protected static final RawAnimation SNIFFING_ANIM = RawAnimation.begin().thenPlay("sniffing").thenLoop("idle");
-	protected static final RawAnimation LAYING_DOWN_ANIM = RawAnimation.begin().thenPlayAndHold("laying down").thenWait(999).thenLoop("idle");
+	protected static final RawAnimation LAYING_DOWN_ANIM = RawAnimation.begin().thenPlayAndHold("laying_down").thenWait(999).thenLoop("idle");
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
