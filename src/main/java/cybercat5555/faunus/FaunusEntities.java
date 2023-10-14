@@ -74,7 +74,7 @@ public final class FaunusEntities
 		.build());
 
 		public static final EntityType<YacareEntity> YACARE = register("yacare", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, YacareEntity::new)
-		.dimensions(EntityDimensions.fixed(2f, 1f))
+		.dimensions(EntityDimensions.fixed(1f, 0.5f))
 		.build());
 
 	public static void init()

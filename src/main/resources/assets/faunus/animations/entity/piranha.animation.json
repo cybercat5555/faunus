@@ -273,12 +273,12 @@
 				},
 				"lFin": {
 					"rotation": {
-						"vector": [0, -12.5, 0]
+						"vector": [0, "Math.sin(query.anim_time*180)*7", 0]
 					}
 				},
 				"rFin": {
 					"rotation": {
-						"vector": [0, 12.5, 0]
+						"vector": [0, "Math.sin(query.anim_time*-180)*7", 0]
 					}
 				},
 				"tail": {
@@ -293,6 +293,30 @@
 						"1.9167": {
 							"vector": [0, -30, 0],
 							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"lowerJaw": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [7.5, 0, 0]
+						},
+						"2.0": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [0, 0, 0.25]
+						},
+						"2.0": {
+							"vector": [0, 0, 0]
 						}
 					}
 				}
