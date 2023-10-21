@@ -13,6 +13,7 @@ import cybercat5555.faunus.entity.SongbirdEntity;
 import cybercat5555.faunus.entity.TapirEntity;
 import cybercat5555.faunus.entity.YacareEntity;
 import cybercat5555.faunus.util.FaunusID;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
@@ -21,6 +22,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.tag.BiomeTags;
 
 public final class FaunusEntities
 {
@@ -53,7 +55,7 @@ public final class FaunusEntities
 		.build());
 
 	public static final EntityType<PiranhaEntity> PIRANHA = register("piranha", FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, PiranhaEntity::new)
-		.dimensions(EntityDimensions.fixed(0.5f, 0.475f))
+		.dimensions(EntityDimensions.fixed(0.5f, 0.675f))
 		.build());
 
 	//-- Swamps ----------------------------------------------------------------
@@ -85,12 +87,14 @@ public final class FaunusEntities
 		FabricDefaultAttributeRegistry.register(CONSTRICTOR, ConstrictorEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(QUETZAL, QuetzalEntity.createQuetzalAttributes());
 		FabricDefaultAttributeRegistry.register(HOATZIN, HoatzinEntity.createChickenAttributes());
-		FabricDefaultAttributeRegistry.register(PIRANHA, PiranhaEntity.createFishAttributes());
+		FabricDefaultAttributeRegistry.register(PIRANHA, PiranhaEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(ARAPAIMA, ArapaimaEntity.createFishAttributes());
 		FabricDefaultAttributeRegistry.register(SNAPPING_TURTLE, SnappingTurtleEntity.createTurtleAttributes());
 		FabricDefaultAttributeRegistry.register(CRAYFISH, CrayfishEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(LEECH, LeechEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(YACARE, YacareEntity.createMobAttributes());
+
+		BiomeModifications.addSpawn(ctx -> ctx.hasTag(BiomeTags.IS_JUNGLE), SpawnGroup.WATER_CREATURE, PIRANHA, 12, 5, 8);
 	}
 
 	private static <T extends Entity> EntityType<T> register(String name, EntityType<T> type)
