@@ -20,9 +20,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.world.Heightmap;
 
 public final class FaunusEntities
 {
@@ -54,8 +57,11 @@ public final class FaunusEntities
 		.dimensions(EntityDimensions.fixed(0.6f, 0.75f))
 		.build());
 
-	public static final EntityType<PiranhaEntity> PIRANHA = register("piranha", FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, PiranhaEntity::new)
+	public static final EntityType<PiranhaEntity> PIRANHA = register("piranha", FabricEntityTypeBuilder.Mob.createMob()
+		.spawnGroup(SpawnGroup.WATER_CREATURE)
+		.entityFactory(PiranhaEntity::new)
 		.dimensions(EntityDimensions.fixed(0.5f, 0.675f))
+		.spawnRestriction(SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FishEntity::canSpawn)
 		.build());
 
 	//-- Swamps ----------------------------------------------------------------
