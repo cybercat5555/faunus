@@ -13,15 +13,12 @@
 			"bones": [
 				{
 					"name": "monke",
-					"pivot": [0, -2, 0]
+					"pivot": [0, 7, 0]
 				},
 				{
 					"name": "body",
 					"parent": "monke",
-					"pivot": [0, 7, 0],
-					"cubes": [
-						{"origin": [-3, 5, -6], "size": [6, 5, 13], "uv": [1, 0]}
-					]
+					"pivot": [0, 7, 0]
 				},
 				{
 					"name": "tail01",
@@ -63,6 +60,14 @@
 					]
 				},
 				{
+					"name": "breathingrig",
+					"parent": "body",
+					"pivot": [0, 7, 0],
+					"cubes": [
+						{"origin": [-3, 5, -6], "size": [6, 5, 13], "uv": [1, 0]}
+					]
+				},
+				{
 					"name": "lArm",
 					"parent": "monke",
 					"pivot": [2.25, 7, -3],
@@ -71,7 +76,7 @@
 					]
 				},
 				{
-					"name": "lArm2",
+					"name": "rArm",
 					"parent": "monke",
 					"pivot": [-2.25, 7, -3],
 					"cubes": [
