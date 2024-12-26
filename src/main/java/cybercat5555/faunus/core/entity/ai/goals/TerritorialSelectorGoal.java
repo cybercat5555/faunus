@@ -30,8 +30,7 @@ public class TerritorialSelectorGoal<T extends LivingEntity> extends ActiveTarge
     }
 
     public void targetEntity() {
-        List<Entity> entities = mob.getWorld().getOtherEntities(mob, mob.getBoundingBox().expand(16.0D, 8.0D, 16.0D), predicate);
-
+        List<Entity> entities = mob.getWorld().getOtherEntities(mob, mob.getBoundingBox().expand(16.0D, 8.0D, 16.0D), predicate).stream().filter(entity -> entity instanceof LivingEntity).toList();
         if (!entities.isEmpty()) {
             target = (LivingEntity) entities.get(0);
             startBlockPos = mob.getBlockPos();
