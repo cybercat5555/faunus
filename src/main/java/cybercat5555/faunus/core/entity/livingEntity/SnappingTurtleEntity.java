@@ -5,6 +5,7 @@ import cybercat5555.faunus.core.entity.ai.goals.TerritorialSelectorGoal;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.control.AquaticMoveControl;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
@@ -16,7 +17,11 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -99,6 +104,14 @@ public class SnappingTurtleEntity extends PathAwareEntity implements GeoEntity {
         }
 
         return PlayState.CONTINUE;
+    }
+
+    public static boolean canSpawn(EntityType<SnappingTurtleEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return pos.getY() < world.getSeaLevel() + 4 && SnappingTurtleEntity.isLightLevelValidForNaturalSpawn(world, pos);
+    }
+
+    protected static boolean isLightLevelValidForNaturalSpawn(BlockRenderView world, BlockPos pos) {
+        return world.getBaseLightLevel(pos, 0) > 8;
     }
 
     static class SnappingTurtleAttack extends MeleeAttackGoal {

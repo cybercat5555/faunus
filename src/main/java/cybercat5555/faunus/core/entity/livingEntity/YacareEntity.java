@@ -13,6 +13,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
@@ -45,6 +46,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
@@ -103,6 +105,10 @@ public class YacareEntity extends TurtleEntity implements GeoEntity, FeedableEnt
                         (target instanceof WaterCreatureEntity && target.getBoundingBox().getAverageSideLength() < getBoundingBox().getAverageSideLength())
                                 || target instanceof IguanaEntity || target instanceof CrayfishEntity));
 
+    }
+
+    public static boolean canSpawnYacare(EntityType<YacareEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return pos.getY() < world.getSeaLevel() + 4 && isLightLevelValidForNaturalSpawn(world, pos);
     }
 
     @Override

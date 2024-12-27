@@ -23,7 +23,8 @@ public class FaunusBiomeTags {
     public static final TagKey<Biome> SPAWNS_YACARE = FaunusBiomeTags.of("spawns_yacare");
     public static final TagKey<Biome> SPAWNS_YACARE_MANEATER = FaunusBiomeTags.of("spawns_yacare_maneater");
 
-    public static final TagKey<Biome> IS_SWAMP = FaunusBiomeTags.of(Identifier.of("c", "is_swamp"));
+    // TODO: changes to c:is_swamp in 1.21
+    public static final TagKey<Biome> SWAMP = FaunusBiomeTags.of(Identifier.of("c", "swamp"));
 
     @SuppressWarnings("UnnecessaryReturnStatement")
     private FaunusBiomeTags() {

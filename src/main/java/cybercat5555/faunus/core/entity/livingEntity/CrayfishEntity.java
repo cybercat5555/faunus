@@ -31,9 +31,9 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -113,6 +113,15 @@ public class CrayfishEntity extends AnimalEntity implements GeoEntity, FeedableE
         }
 
         return PlayState.CONTINUE;
+    }
+
+    public static boolean canSpawn(EntityType<CrayfishEntity> type, WorldAccess world, SpawnReason reason, BlockPos pos, Random random) {
+        return pos.getY() >= world.getSeaLevel() - 13;
+    }
+
+    @Override
+    public boolean canSpawn(WorldView world) {
+        return world.doesNotIntersectEntities(this);
     }
 
     @Override
