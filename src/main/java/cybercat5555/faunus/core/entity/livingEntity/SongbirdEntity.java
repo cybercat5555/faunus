@@ -19,13 +19,13 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.EntityView;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -120,6 +120,10 @@ public class SongbirdEntity extends ParrotEntity implements GeoEntity {
         }
 
         return PlayState.CONTINUE;
+    }
+
+    public static boolean canSpawnSongbird(EntityType<SongbirdEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isIn(BlockTags.PARROTS_SPAWNABLE_ON) && isLightLevelValidForNaturalSpawn(world, pos);
     }
 
     @Override

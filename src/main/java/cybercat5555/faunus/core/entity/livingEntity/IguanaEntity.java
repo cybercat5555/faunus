@@ -3,7 +3,9 @@ package cybercat5555.faunus.core.entity.livingEntity;
 import cybercat5555.faunus.core.ItemRegistry;
 import cybercat5555.faunus.core.entity.FeedableEntity;
 import cybercat5555.faunus.util.FaunusID;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.control.AquaticMoveControl;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -18,11 +20,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -158,6 +165,27 @@ public class IguanaEntity extends AnimalEntity implements GeoEntity, FeedableEnt
         return PlayState.CONTINUE;
     }
 
+
+    public static boolean canSpawn(EntityType<IguanaEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return true;
+    }
+
+    @Override
+    public boolean canSpawn(WorldView world) {
+        if (world.doesNotIntersectEntities(this) && !world.containsFluid(this.getBoundingBox())) {
+            BlockPos blockPos = this.getBlockPos();
+            if (blockPos.getY() < world.getSeaLevel()) {
+                return false;
+            }
+
+            BlockState blockState = world.getBlockState(blockPos.down());
+            return  blockState.isIn(BlockTags.ANIMALS_SPAWNABLE_ON) ||
+                    blockState.isIn(BlockTags.LEAVES) ||
+                    blockState.isIn(BlockTags.LOGS);
+        }
+
+        return false;
+    }
 
     @Override
     public boolean cannotDespawn() {

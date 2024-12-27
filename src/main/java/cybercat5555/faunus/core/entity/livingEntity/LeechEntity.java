@@ -7,6 +7,7 @@ import cybercat5555.faunus.util.FaunusID;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -25,7 +26,10 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -130,6 +134,15 @@ public class LeechEntity extends PathAwareEntity implements GeoEntity, FeedableE
         }
 
         return PlayState.CONTINUE;
+    }
+
+    public static boolean canSpawn(EntityType<LeechEntity> type, WorldAccess world, SpawnReason reason, BlockPos pos, Random random) {
+        return pos.getY() >= world.getSeaLevel() - 13;
+    }
+
+    @Override
+    public boolean canSpawn(WorldView world) {
+        return world.doesNotIntersectEntities(this);
     }
 
     @Override

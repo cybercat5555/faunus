@@ -57,47 +57,47 @@ public class MobSpawningConfig {
         configRegistry.addPairData(new Pair<>("constrictor_spawn_max_group", 3), "Constrictor spawn max group");
 
         configRegistry.addComment("Crayfish");
-        configRegistry.addPairData(new Pair<>("crayfish_spawn_weight", 5), "Crayfish spawn weight");
+        configRegistry.addPairData(new Pair<>("crayfish_spawn_weight", 15), "Crayfish spawn weight");
         configRegistry.addPairData(new Pair<>("crayfish_spawn_min_group", 1), "Crayfish spawn min group");
         configRegistry.addPairData(new Pair<>("crayfish_spawn_max_group", 3), "Crayfish spawn max group");
 
         configRegistry.addComment("Hoatzin");
-        configRegistry.addPairData(new Pair<>("hoatzin_spawn_weight", 5), "Hoatzin spawn weight");
+        configRegistry.addPairData(new Pair<>("hoatzin_spawn_weight", 25), "Hoatzin spawn weight");
         configRegistry.addPairData(new Pair<>("hoatzin_spawn_min_group", 1), "Hoatzin spawn min group");
         configRegistry.addPairData(new Pair<>("hoatzin_spawn_max_group", 3), "Hoatzin spawn max group");
 
         configRegistry.addComment("Iguana");
-        configRegistry.addPairData(new Pair<>("iguana_spawn_weight", 5), "Iguana spawn weight");
+        configRegistry.addPairData(new Pair<>("iguana_spawn_weight", 25), "Iguana spawn weight");
         configRegistry.addPairData(new Pair<>("iguana_spawn_min_group", 1), "Iguana spawn min group");
         configRegistry.addPairData(new Pair<>("iguana_spawn_max_group", 3), "Iguana spawn max group");
 
         configRegistry.addComment("Leech");
-        configRegistry.addPairData(new Pair<>("leech_spawn_weight", 5), "Leech spawn weight");
+        configRegistry.addPairData(new Pair<>("leech_spawn_weight", 15), "Leech spawn weight");
         configRegistry.addPairData(new Pair<>("leech_spawn_min_group", 1), "Leech spawn min group");
         configRegistry.addPairData(new Pair<>("leech_spawn_max_group", 3), "Leech spawn max group");
 
         configRegistry.addComment("Piranha");
-        configRegistry.addPairData(new Pair<>("piranha_spawn_weight", 5), "Piranha spawn weight");
+        configRegistry.addPairData(new Pair<>("piranha_spawn_weight", 10), "Piranha spawn weight");
         configRegistry.addPairData(new Pair<>("piranha_spawn_min_group", 1), "Piranha spawn min group");
         configRegistry.addPairData(new Pair<>("piranha_spawn_max_group", 3), "Piranha spawn max group");
 
         configRegistry.addComment("Quetzal");
-        configRegistry.addPairData(new Pair<>("quetzal_spawn_weight", 5), "Quetzal spawn weight");
+        configRegistry.addPairData(new Pair<>("quetzal_spawn_weight", 25), "Quetzal spawn weight");
         configRegistry.addPairData(new Pair<>("quetzal_spawn_min_group", 1), "Quetzal spawn min group");
         configRegistry.addPairData(new Pair<>("quetzal_spawn_max_group", 3), "Quetzal spawn max group");
 
         configRegistry.addComment("Snapping Turtle");
-        configRegistry.addPairData(new Pair<>("snapping_turtle_spawn_weight", 5), "Snapping Turtle spawn weight");
+        configRegistry.addPairData(new Pair<>("snapping_turtle_spawn_weight", 15), "Snapping Turtle spawn weight");
         configRegistry.addPairData(new Pair<>("snapping_turtle_spawn_min_group", 1), "Snapping Turtle spawn min group");
         configRegistry.addPairData(new Pair<>("snapping_turtle_spawn_max_group", 3), "Snapping Turtle spawn max group");
 
         configRegistry.addComment("Songbird");
-        configRegistry.addPairData(new Pair<>("songbird_spawn_weight", 5), "Songbird spawn weight");
+        configRegistry.addPairData(new Pair<>("songbird_spawn_weight", 25), "Songbird spawn weight");
         configRegistry.addPairData(new Pair<>("songbird_spawn_min_group", 1), "Songbird spawn min group");
         configRegistry.addPairData(new Pair<>("songbird_spawn_max_group", 3), "Songbird spawn max group");
 
         configRegistry.addComment("Tapir");
-        configRegistry.addPairData(new Pair<>("tapir_spawn_weight", 5), "Tapir spawn weight");
+        configRegistry.addPairData(new Pair<>("tapir_spawn_weight", 10), "Tapir spawn weight");
         configRegistry.addPairData(new Pair<>("tapir_spawn_min_group", 1), "Tapir spawn min group");
         configRegistry.addPairData(new Pair<>("tapir_spawn_max_group", 3), "Tapir spawn max group");
 
@@ -107,7 +107,7 @@ public class MobSpawningConfig {
         configRegistry.addPairData(new Pair<>("tarantula_spawn_max_group", 3), "Tarantula spawn max group");
 
         configRegistry.addComment("Yacare");
-        configRegistry.addPairData(new Pair<>("yacare_spawn_weight", 5), "Yacare spawn weight");
+        configRegistry.addPairData(new Pair<>("yacare_spawn_weight", 10), "Yacare spawn weight");
         configRegistry.addPairData(new Pair<>("yacare_spawn_min_group", 1), "Yacare spawn min group");
         configRegistry.addPairData(new Pair<>("yacare_spawn_max_group", 3), "Yacare spawn max group");
 

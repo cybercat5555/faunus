@@ -25,6 +25,7 @@ public class FlightWalkMoveControl extends MoveControl {
     public FlightWalkMoveControl(MobEntity entity, int maxPitchChange, boolean noGravity) {
         super(entity);
         this.noGravity = noGravity;
+        this.type = MoveType.WALK;
     }
 
     public void changeMovementType(MoveType type) {

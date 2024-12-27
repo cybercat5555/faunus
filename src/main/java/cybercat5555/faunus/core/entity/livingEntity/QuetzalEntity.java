@@ -3,16 +3,21 @@ package cybercat5555.faunus.core.entity.livingEntity;
 import cybercat5555.faunus.core.EntityRegistry;
 import cybercat5555.faunus.core.SoundRegistry;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -60,6 +65,10 @@ public class QuetzalEntity extends ParrotEntity implements GeoEntity {
     @Override
     public void registerControllers(ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "idle", 10, this::idleAnimController));
+    }
+
+    public static boolean canSpawnQuetzal(EntityType<QuetzalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isIn(BlockTags.PARROTS_SPAWNABLE_ON) && isLightLevelValidForNaturalSpawn(world, pos);
     }
 
     @Override

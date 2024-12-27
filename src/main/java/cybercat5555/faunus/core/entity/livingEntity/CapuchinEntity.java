@@ -6,8 +6,10 @@ import cybercat5555.faunus.core.entity.FeedableEntity;
 import cybercat5555.faunus.core.entity.ai.goals.HangTreeGoal;
 import cybercat5555.faunus.core.entity.projectile.CocoaBeanProjectile;
 import cybercat5555.faunus.util.FaunusID;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -21,6 +23,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
@@ -28,8 +31,11 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -85,8 +91,6 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
         this.goalSelector.add(4, new FollowOwnerGoal(this, 1.0, 5.0f, 1.0f, true));
 
         targetSelector.add(1, new RevengeGoal(this));
-        targetSelector.add(2, new ActiveTargetGoal<>(this, LivingEntity.class, true,
-                target -> target instanceof CapuchinEntity || target instanceof PlayerEntity));
     }
 
     @Override
@@ -149,6 +153,26 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
         }
 
         return PlayState.STOP;
+    }
+
+    public static boolean canSpawn(EntityType<CapuchinEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isIn(BlockTags.PARROTS_SPAWNABLE_ON);
+    }
+
+    public boolean canSpawn(WorldView world) {
+        if (world.doesNotIntersectEntities(this) && !world.containsFluid(this.getBoundingBox())) {
+            BlockPos blockPos = this.getBlockPos();
+            if (blockPos.getY() < world.getSeaLevel()) {
+                return false;
+            }
+
+            BlockState blockState = world.getBlockState(blockPos.down());
+            return  blockState.isIn(BlockTags.ANIMALS_SPAWNABLE_ON) ||
+                    blockState.isIn(BlockTags.LEAVES) ||
+                    blockState.isIn(BlockTags.LOGS);
+        }
+
+        return false;
     }
 
     @Nullable
