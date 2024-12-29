@@ -42,14 +42,14 @@ public class TerritorialSelectorGoal<T extends LivingEntity> extends ActiveTarge
     public boolean canStart() {
         if (target != null) return true;
 
-        return mob.getWorld().getOtherEntities(mob, mob.getBoundingBox().expand(16.0D, 8.0D, 16.0D), predicate).size() > 0;
+        return !mob.getWorld().getOtherEntities(mob, mob.getBoundingBox().expand(16.0D, 8.0D, 16.0D), predicate).isEmpty();
     }
 
     @Override
     public boolean shouldContinue() {
         if (mob.isTouchingWater() || followOutWater) {
             timeToAttack = 0;
-        } else if (!followOutWater && mob.isTouchingWater()) {
+        } else if (mob.isTouchingWater()) {
             timeToAttack++;
 
             return timeToAttack < ATTACK_COOLDOWN;
@@ -60,6 +60,7 @@ public class TerritorialSelectorGoal<T extends LivingEntity> extends ActiveTarge
 
     @Override
     public void stop() {
-        mob.getNavigation().startMovingTo(startBlockPos.getX(), startBlockPos.getY(), startBlockPos.getZ(), 1.0D);
+        if(startBlockPos != null)
+            mob.getNavigation().startMovingTo(startBlockPos.getX(), startBlockPos.getY(), startBlockPos.getZ(), 1.0D);
     }
 }
