@@ -17,13 +17,13 @@ public class LeechingEffect extends StatusEffect {
     }
 
     @Override
-    public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
+    public void onApplied(LivingEntity entity, int amplifier) {
         affectedEntity = entity;
-        super.onApplied(entity, attributes, amplifier);
+        super.onApplied(entity, amplifier);
     }
 
     @Override
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         Random random = new Random();
         amplifier = Math.max(1, amplifier);
 
@@ -33,12 +33,13 @@ public class LeechingEffect extends StatusEffect {
         }
 
         super.applyUpdateEffect(entity, amplifier);
+        return true;
     }
 
 
     @Override
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
-        return affectedEntity != null && !MCUtil.containsEffect(affectedEntity, StatusEffects.RESISTANCE) && !MCUtil.containsEffect(affectedEntity, StatusEffects.REGENERATION);
+        return affectedEntity != null && !MCUtil.containsEffect(affectedEntity, StatusEffects.RESISTANCE.value()) && !MCUtil.containsEffect(affectedEntity, StatusEffects.REGENERATION.value());
     }
 
 }

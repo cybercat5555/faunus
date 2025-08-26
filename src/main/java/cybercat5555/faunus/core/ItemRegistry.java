@@ -6,7 +6,6 @@ import cybercat5555.faunus.core.item.BottledLeech;
 import cybercat5555.faunus.core.item.Crayfish;
 import cybercat5555.faunus.core.item.QuetzalFeatherTrinket;
 import cybercat5555.faunus.util.FaunusID;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
@@ -23,72 +22,72 @@ public final class ItemRegistry {
 
 
     // Iguana
-    public static final Item IGUANA_SPAWN_EGG = new SpawnEggItem(EntityRegistry.IGUANA, 0x4A8B4B, 0x3D3E3A, new FabricItemSettings());
-    public static final Item IGUANA_RAW_TAIL = new Item(new FabricItemSettings().food(FoodRegistry.IGUANA_RAW_TAIL));
-    public static final Item IGUANA_TAIL_COOKED = new Item(new FabricItemSettings().food(FoodRegistry.IGUANA_COOKED_TAIL));
-    public static final Item IGUANA_RAW_MEAT = new Item(new FabricItemSettings().food(FoodRegistry.IGUANA_RAW_MEAT));
-    public static final Item IGUANA_COOKED_MEAT = new Item(new FabricItemSettings().food(FoodRegistry.IGUANA_COOKED_MEAT));
+    public static final Item IGUANA_SPAWN_EGG = new SpawnEggItem(EntityRegistry.IGUANA, 0x4A8B4B, 0x3D3E3A, new Item.Settings());
+    public static final Item IGUANA_RAW_TAIL = new Item(new Item.Settings().food(FoodRegistry.IGUANA_RAW_TAIL));
+    public static final Item IGUANA_TAIL_COOKED = new Item(new Item.Settings().food(FoodRegistry.IGUANA_COOKED_TAIL));
+    public static final Item IGUANA_RAW_MEAT = new Item(new Item.Settings().food(FoodRegistry.IGUANA_RAW_MEAT));
+    public static final Item IGUANA_COOKED_MEAT = new Item(new Item.Settings().food(FoodRegistry.IGUANA_COOKED_MEAT));
 
     // Songbird
-    public static final Item SONGBIRD_SPAWN_EGG = new SpawnEggItem(EntityRegistry.SONGBIRD, 0xeeeeee, 0xaaaaaa, new FabricItemSettings());
+    public static final Item SONGBIRD_SPAWN_EGG = new SpawnEggItem(EntityRegistry.SONGBIRD, 0xeeeeee, 0xaaaaaa, new Item.Settings());
 
     // Capuchin
-    public static final Item CAPUCHIN_SPAWN_EGG = new SpawnEggItem(EntityRegistry.CAPUCHIN, 0x2F2721, 0xE8E1D4, new FabricItemSettings());
+    public static final Item CAPUCHIN_SPAWN_EGG = new SpawnEggItem(EntityRegistry.CAPUCHIN, 0x2F2721, 0xE8E1D4, new Item.Settings());
 
     // Tapir
-    public static final Item TAPIR_SPAWN_EGG = new SpawnEggItem(EntityRegistry.TAPIR, 0xa3D2F29, 0xB0874F, new FabricItemSettings());
-    public static final Item TAPIR_MEAT = new Item(new FabricItemSettings().food(FoodRegistry.TAPIR_MEAT));
-    public static final Item COOKED_TAPIR_MEAT = new Item(new FabricItemSettings().food(FoodRegistry.COOKED_TAPIR_MEAT));
-    public static final Item BOTTLED_STINK = new Item(new FabricItemSettings());
+    public static final Item TAPIR_SPAWN_EGG = new SpawnEggItem(EntityRegistry.TAPIR, 0xa3D2F29, 0xB0874F, new Item.Settings());
+    public static final Item TAPIR_MEAT = new Item(new Item.Settings().food(FoodRegistry.TAPIR_MEAT));
+    public static final Item COOKED_TAPIR_MEAT = new Item(new Item.Settings().food(FoodRegistry.COOKED_TAPIR_MEAT));
+    public static final Item BOTTLED_STINK = new Item(new Item.Settings());
 
 
     // Constrictor
-    public static final Item CONSTRICTOR_SPAWN_EGG = new SpawnEggItem(EntityRegistry.CONSTRICTOR, 0x30a050, 0x101010, new FabricItemSettings());
+    public static final Item CONSTRICTOR_SPAWN_EGG = new SpawnEggItem(EntityRegistry.CONSTRICTOR, 0x30a050, 0x101010, new Item.Settings());
 
     // Quetzal
-    public static final Item QUETZAL_SPAWN_EGG = new SpawnEggItem(EntityRegistry.QUETZAL, 0x00A55F, 0x940E0E, new FabricItemSettings());
-    public static final Item QUETZAL_FEATHER = new Item(new FabricItemSettings());
-    public static final Item QUETZAL_FEATHER_TRINKET = new QuetzalFeatherTrinket(new FabricItemSettings().maxCount(1));
+    public static final Item QUETZAL_SPAWN_EGG = new SpawnEggItem(EntityRegistry.QUETZAL, 0x00A55F, 0x940E0E, new Item.Settings());
+    public static final Item QUETZAL_FEATHER = new Item(new Item.Settings());
+    public static final Item QUETZAL_FEATHER_TRINKET = new QuetzalFeatherTrinket(new Item.Settings().maxCount(1));
 
 
     // Hoatzin
-    public static final Item HOATZIN_SPAWN_EGG = new SpawnEggItem(EntityRegistry.HOATZIN, 0xA85537, 0xEECFAA, new FabricItemSettings());
-    public static final Item HOATZIN_FEATHER = new Item(new FabricItemSettings());
+    public static final Item HOATZIN_SPAWN_EGG = new SpawnEggItem(EntityRegistry.HOATZIN, 0xA85537, 0xEECFAA, new Item.Settings());
+    public static final Item HOATZIN_FEATHER = new Item(new Item.Settings());
 
     // Piranha
-    public static final Item PIRANHA_SPAWN_EGG = new SpawnEggItem(EntityRegistry.PIRANHA, 0x5B5B5B, 0xC61F17, new FabricItemSettings());
-    public static final Item PIRANHA = new Item(new FabricItemSettings().food(FoodRegistry.PIRANHA));
-    public static final Item COOKED_PIRANHA = new Item(new FabricItemSettings().food(FoodRegistry.COOKED_PIRANHA));
-    public static final Item PIRANHA_BUCKET = new EntityBucketItem(EntityRegistry.PIRANHA, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_FISH, new FabricItemSettings().recipeRemainder(Items.BUCKET));
+    public static final Item PIRANHA_SPAWN_EGG = new SpawnEggItem(EntityRegistry.PIRANHA, 0x5B5B5B, 0xC61F17, new Item.Settings());
+    public static final Item PIRANHA = new Item(new Item.Settings().food(FoodRegistry.PIRANHA));
+    public static final Item COOKED_PIRANHA = new Item(new Item.Settings().food(FoodRegistry.COOKED_PIRANHA));
+    public static final Item PIRANHA_BUCKET = new EntityBucketItem(EntityRegistry.PIRANHA, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_FISH, new Item.Settings().recipeRemainder(Items.BUCKET));
 
     // Arapaima
-    public static final Item ARAPAIMA_SPAWN_EGG = new SpawnEggItem(EntityRegistry.ARAPAIMA, 0x7F7A5C, 0xB13030, new FabricItemSettings());
-    public static final Item ARAPAIMA = new Item(new FabricItemSettings().food(FoodRegistry.ARAPAIMA));
-    public static final Item ARAPAIMA_EGG = new BlockItem(BlockRegistry.ARAPAIMA_EGG, new FabricItemSettings());
-    public static final Item COOKED_ARAPAIMA = new Item(new FabricItemSettings().food(FoodRegistry.COOKED_ARAPAIMA));
-    public static final Item ARAPAIMA_SCALE = new Item(new FabricItemSettings().rarity(Rarity.RARE));
-    public static final Item ARAPAIMA_BUCKET = new EntityBucketItem(EntityRegistry.ARAPAIMA, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_FISH, new FabricItemSettings().recipeRemainder(Items.BUCKET));
+    public static final Item ARAPAIMA_SPAWN_EGG = new SpawnEggItem(EntityRegistry.ARAPAIMA, 0x7F7A5C, 0xB13030, new Item.Settings());
+    public static final Item ARAPAIMA = new Item(new Item.Settings().food(FoodRegistry.ARAPAIMA));
+    public static final Item ARAPAIMA_EGG = new BlockItem(BlockRegistry.ARAPAIMA_EGG, new Item.Settings());
+    public static final Item COOKED_ARAPAIMA = new Item(new Item.Settings().food(FoodRegistry.COOKED_ARAPAIMA));
+    public static final Item ARAPAIMA_SCALE = new Item(new Item.Settings().rarity(Rarity.RARE));
+    public static final Item ARAPAIMA_BUCKET = new EntityBucketItem(EntityRegistry.ARAPAIMA, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_FISH, new Item.Settings().recipeRemainder(Items.BUCKET));
 
     // Snapping Turtle
-    public static final Item SNAPPING_TURTLE_SPAWN_EGG = new SpawnEggItem(EntityRegistry.SNAPPING_TURTLE, 0x2C2A1D, 0x645C51, new FabricItemSettings());
+    public static final Item SNAPPING_TURTLE_SPAWN_EGG = new SpawnEggItem(EntityRegistry.SNAPPING_TURTLE, 0x2C2A1D, 0x645C51, new Item.Settings());
 
     // Crayfish
-    public static final Item CRAYFISH_SPAWN_EGG = new SpawnEggItem(EntityRegistry.CRAYFISH, 0x6B6130, 0xCD572F, new FabricItemSettings());
-    public static final Item CRAYFISH = new Crayfish(new FabricItemSettings().food(FoodRegistry.CRAYFISH), CrayfishVariant.DEFAULT);
-    public static final Item BLUE_CRAYFISH = new Crayfish(new FabricItemSettings().food(FoodRegistry.BLUE_CRAYFISH), CrayfishVariant.BLUE);
-    public static final Item COOKED_CRAYFISH = new Item(new FabricItemSettings().food(FoodRegistry.COOKED_CRAYFISH));
+    public static final Item CRAYFISH_SPAWN_EGG = new SpawnEggItem(EntityRegistry.CRAYFISH, 0x6B6130, 0xCD572F, new Item.Settings());
+    public static final Item CRAYFISH = new Crayfish(new Item.Settings().food(FoodRegistry.CRAYFISH), CrayfishVariant.DEFAULT);
+    public static final Item BLUE_CRAYFISH = new Crayfish(new Item.Settings().food(FoodRegistry.BLUE_CRAYFISH), CrayfishVariant.BLUE);
+    public static final Item COOKED_CRAYFISH = new Item(new Item.Settings().food(FoodRegistry.COOKED_CRAYFISH));
 
 
     // Leech
-    public static final Item LEECH_SPAWN_EGG = new SpawnEggItem(EntityRegistry.LEECH, 0x202314, 0xC67824, new FabricItemSettings());
-    public static final Item BOTTLED_LEECH = new BottledLeech(new FabricItemSettings());
+    public static final Item LEECH_SPAWN_EGG = new SpawnEggItem(EntityRegistry.LEECH, 0x202314, 0xC67824, new Item.Settings());
+    public static final Item BOTTLED_LEECH = new BottledLeech(new Item.Settings());
 
 
     // Yacare
-    public static final Item YACARE_SPAWN_EGG = new SpawnEggItem(EntityRegistry.YACARE, 0xA39263, 0x483E2C, new FabricItemSettings());
-    public static final Item COOKED_YACARE = new Item(new FabricItemSettings().food(FoodRegistry.COOKED_YACARE));
-    public static final Item RAW_YACARE = new Item(new FabricItemSettings().food(FoodRegistry.RAW_YACARE));
-    public static final Item YACARE_EGG = new BlockItem(BlockRegistry.YACARE_EGG, new FabricItemSettings());
+    public static final Item YACARE_SPAWN_EGG = new SpawnEggItem(EntityRegistry.YACARE, 0xA39263, 0x483E2C, new Item.Settings());
+    public static final Item COOKED_YACARE = new Item(new Item.Settings().food(FoodRegistry.COOKED_YACARE));
+    public static final Item RAW_YACARE = new Item(new Item.Settings().food(FoodRegistry.RAW_YACARE));
+    public static final Item YACARE_EGG = new BlockItem(BlockRegistry.YACARE_EGG, new Item.Settings());
 
 
     /**

@@ -47,13 +47,15 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
+
+import javax.xml.crypto.Data;
 
 public class ArapaimaEntity extends FishEntity implements GeoEntity, FeedableEntity, MateEntity {
     protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("idle");
@@ -92,9 +94,9 @@ public class ArapaimaEntity extends FishEntity implements GeoEntity, FeedableEnt
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(HAS_EGG, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(HAS_EGG, false);
     }
 
     @Override
@@ -354,15 +356,15 @@ public class ArapaimaEntity extends FishEntity implements GeoEntity, FeedableEnt
         }
 
         protected boolean attack(LivingEntity target) {
-            double squaredDistance = this.mob.getSquaredDistanceToAttackPosOf(this.mob.getLastAttacker());
-            double distance = this.mob.getSquaredDistanceToAttackPosOf(target);
-
-            if (squaredDistance <= distance) {
+//            double squaredDistance = this.mob.getSquaredDistanceToAttackPosOf(this.mob.getLastAttacker());
+//            double distance = this.mob.getSquaredDistanceToAttackPosOf(target);
+//
+//            if (squaredDistance <= distance) {
                 this.mob.tryAttack(target);
                 return true;
-            }
+//            }
 
-            return false;
+//            return false;
         }
 
         @Override

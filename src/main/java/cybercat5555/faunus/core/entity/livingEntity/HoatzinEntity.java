@@ -30,12 +30,12 @@ import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class HoatzinEntity extends ParrotEntity implements GeoEntity, FeedableEntity {
@@ -53,7 +53,6 @@ public class HoatzinEntity extends ParrotEntity implements GeoEntity, FeedableEn
 
     public HoatzinEntity(EntityType<? extends ParrotEntity> entityType, World world) {
         super(entityType, world);
-        setStepHeight(1.0f);
         moveControl = new FlightWalkMoveControl(this, 90, false);
         ((FlightWalkMoveControl) moveControl).changeMovementType(MoveType.WALK);
     }
@@ -93,6 +92,7 @@ public class HoatzinEntity extends ParrotEntity implements GeoEntity, FeedableEn
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.4f)
+                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.0f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6f);
     }
 
@@ -113,12 +113,6 @@ public class HoatzinEntity extends ParrotEntity implements GeoEntity, FeedableEn
     public boolean cannotDespawn() {
         return super.cannotDespawn() || hasBeenFed;
     }
-
-    @Override
-    public EntityView method_48926() {
-        return getWorld();
-    }
-
 
     @Override
     public void feedEntity(PlayerEntity player, ItemStack stack) {

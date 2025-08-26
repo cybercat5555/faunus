@@ -13,6 +13,7 @@ import net.minecraft.util.Identifier;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
+import software.bernie.geckolib.util.Color;
 
 public class SongbirdLayer extends GeoRenderLayer<SongbirdEntity> {
     private static final Identifier BELLY_TEXTURE = FaunusID.content("textures/entity/songbird/songbird_belly.png");
@@ -55,10 +56,7 @@ public class SongbirdLayer extends GeoRenderLayer<SongbirdEntity> {
                     partialTick,
                     packedLight,
                     OverlayTexture.DEFAULT_UV,
-                    color[0],
-                    color[1],
-                    color[2],
-                    1.0F
+                    Color.ofRGB(color[0],color[1],color[2]).argbInt()
             );
         }
 

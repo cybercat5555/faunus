@@ -66,7 +66,7 @@ public class MCUtil {
     }
 
     public static RegistryKey<Biome> getBiomeKey(String id) {
-        return id != null ? RegistryKey.of(RegistryKeys.BIOME, new Identifier(id)) : null;
+        return id != null ? RegistryKey.of(RegistryKeys.BIOME, Identifier.of(id)) : null;
     }
 
     public static List<RegistryKey<Biome>> getBiomeKeys(String[] ids) {

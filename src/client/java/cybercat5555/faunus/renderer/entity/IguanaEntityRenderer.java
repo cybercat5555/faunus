@@ -19,12 +19,12 @@ public class IguanaEntityRenderer extends GeoEntityRenderer<IguanaEntity> {
 
 
     @Override
-    public void renderRecursively(MatrixStack poseStack, IguanaEntity animatable, GeoBone bone, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderRecursively(MatrixStack poseStack, IguanaEntity animatable, GeoBone bone, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int color) {
         // Hide the tail if entity lost it
         if (bone.getName().equals("tail") && !animatable.hasTail()) {
             return;
         }
 
-        super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+        super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, color);
     }
 }

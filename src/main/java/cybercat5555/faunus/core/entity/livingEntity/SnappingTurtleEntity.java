@@ -23,13 +23,13 @@ import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.GeoAnimatable;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class SnappingTurtleEntity extends PathAwareEntity implements GeoEntity {
@@ -43,11 +43,6 @@ public class SnappingTurtleEntity extends PathAwareEntity implements GeoEntity {
     public SnappingTurtleEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
         this.moveControl = new AquaticMoveControl(this, 85, 10, 2F, 0.5F, true);
-    }
-
-    @Override
-    public boolean canBreatheInWater() {
-        return true;
     }
 
     public static DefaultAttributeContainer.Builder createMobAttributes() {
@@ -123,14 +118,14 @@ public class SnappingTurtleEntity extends PathAwareEntity implements GeoEntity {
         }
 
         @Override
-        protected void attack(LivingEntity target, double squaredDistance) {
+        protected void attack(LivingEntity target) {
             if (this.mob instanceof SnappingTurtleEntity &&
-                    this.attackCooldown-- <= 0 && squaredDistance < 2.0D) {
+                    this.attackCooldown-- <= 0 && target.getPos().distanceTo(this.mob.getPos()) < 2) {
                 this.attackCooldown = ATTACK_COOLDOWN;
                 target.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 60, 2));
                 this.mob.setAttacking(true);
 
-                super.attack(target, squaredDistance);
+                super.attack(target);
             } else if(attackCooldown <= 10) {
                 this.mob.setAttacking(false);
             }

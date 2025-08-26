@@ -1,7 +1,6 @@
 package cybercat5555.faunus.core.effect;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 
@@ -12,13 +11,14 @@ public class ClearEffectsEffect extends StatusEffect {
     }
 
     @Override
-    public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
+    public void onApplied(LivingEntity entity, int amplifier) {
         entity.clearStatusEffects();
     }
 
     @Override
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         entity.clearStatusEffects();
+        return false;
     }
 
     @Override

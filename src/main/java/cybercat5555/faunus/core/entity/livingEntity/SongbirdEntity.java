@@ -29,13 +29,15 @@ import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
+
+import javax.xml.crypto.Data;
 
 public class SongbirdEntity extends ParrotEntity implements GeoEntity {
     private static final TrackedData<Integer> PATTERN = DataTracker.registerData(SongbirdEntity.class, TrackedDataHandlerRegistry.INTEGER);
@@ -53,10 +55,10 @@ public class SongbirdEntity extends ParrotEntity implements GeoEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(PATTERN, 0);
-        this.dataTracker.startTracking(VARIANT, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(PATTERN, 0);
+        builder.add(VARIANT, 0);
     }
 
     public static DefaultAttributeContainer.Builder createSongbirdAttributes() {
@@ -132,12 +134,6 @@ public class SongbirdEntity extends ParrotEntity implements GeoEntity {
     }
 
     @Override
-    public EntityView method_48926() {
-        return getWorld();
-    }
-
-
-    @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putInt("Pattern", getBirdPattern().getId());
@@ -154,7 +150,7 @@ public class SongbirdEntity extends ParrotEntity implements GeoEntity {
     /* VARIANT */
 
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         world.getBiome(this.getBlockPos()).isIn(BiomeTags.IS_JUNGLE);
 
         RegistryEntry<Biome> biome = world.getBiome(this.getBlockPos());
@@ -163,7 +159,7 @@ public class SongbirdEntity extends ParrotEntity implements GeoEntity {
         this.setVariant(variant);
         this.setPattern(variant.getPattern());
 
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
 

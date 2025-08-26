@@ -6,6 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PotionItem;
+import net.minecraft.registry.Registries;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -23,7 +24,7 @@ public class DrinkablePotionMixin {
         // If item is leeching potion, and is a drinkable potion apply clear effects
         if (stack.getItem() == ItemRegistry.BOTTLED_LEECH) {
             clearNegativeEffects(user);
-            user.addStatusEffect(new StatusEffectInstance(EffectStatusRegistry.LEECHING_EFFECT, 1200));
+            user.addStatusEffect(new StatusEffectInstance(Registries.STATUS_EFFECT.getEntry(EffectStatusRegistry.LEECHING_EFFECT), 1200));
             stack.decrement(1);
 
             cir.setReturnValue(stack);
@@ -41,7 +42,7 @@ public class DrinkablePotionMixin {
         while (iterator.hasNext()) {
             StatusEffectInstance effect = iterator.next();
 
-            if (!effect.getEffectType().isBeneficial()) {
+            if (!effect.getEffectType().value().isBeneficial()) {
                 user.removeStatusEffect(effect.getEffectType());
             }
 

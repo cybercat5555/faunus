@@ -7,6 +7,7 @@ import cybercat5555.faunus.core.SoundRegistry;
 import cybercat5555.faunus.core.entity.FeedableEntity;
 import cybercat5555.faunus.util.FaunusID;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.block.PowderSnowBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.Brain;
@@ -17,12 +18,16 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.WitchEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.PotionItem;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
@@ -51,12 +56,12 @@ import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
@@ -183,10 +188,9 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
     @Override
     public void onDamaged(DamageSource damageSource) {
         if (!this.isBaby() && random.nextFloat() < STINKY_EFFECT_CHANCE && damageSource.getSource() instanceof LivingEntity attacker) {
-            StatusEffectInstance stinkyEffect = new StatusEffectInstance(EffectStatusRegistry.STINKY_EFFECT, 20 * 60);
+            StatusEffectInstance stinkyEffect = new StatusEffectInstance(Registries.STATUS_EFFECT.getEntry(EffectStatusRegistry.STINKY_EFFECT), 20 * 60);
             attacker.addStatusEffect(stinkyEffect);
         }
-
         super.onDamaged(damageSource);
     }
 
@@ -199,6 +203,11 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
         if (getWorld().isClient) {
             tempInt = random.nextInt(1024);
         }
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return stack.isIn(this.getBreedingItemsTag());
     }
 
 
@@ -230,7 +239,7 @@ public class TapirEntity extends AnimalEntity implements GeoEntity, SmartBrainOw
         return BrainActivityGroup.coreTasks
                 (new FollowEntity<>(),
                         new MoveToWalkTarget<>(),
-                        new BreedTask(EntityRegistry.TAPIR, 1f));
+                        new BreedTask(EntityRegistry.TAPIR));
     }
 
     @SuppressWarnings("unchecked")

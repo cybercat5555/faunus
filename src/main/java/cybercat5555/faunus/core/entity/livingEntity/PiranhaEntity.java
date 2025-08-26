@@ -3,10 +3,7 @@ package cybercat5555.faunus.core.entity.livingEntity;
 import cybercat5555.faunus.core.ItemRegistry;
 import cybercat5555.faunus.core.entity.ai.goals.PiranhaAttackGoal;
 import cybercat5555.faunus.core.entity.ai.goals.PiranhaJumpAttackGoal;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -19,17 +16,18 @@ import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.entity.passive.SchoolingFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class PiranhaEntity extends FaunusFishEntity implements GeoEntity {
@@ -127,12 +125,12 @@ public class PiranhaEntity extends FaunusFishEntity implements GeoEntity {
 
         if (skeletonHorse != null) {
             skeletonHorse.refreshPositionAndAngles(horse.getX(), horse.getY(), horse.getZ(), horse.getYaw(), horse.getPitch());
-            skeletonHorse.initialize(world, horse.getWorld().getLocalDifficulty(horse.getBlockPos()), SpawnReason.MOB_SUMMONED, null, null);
+            skeletonHorse.initialize(world, horse.getWorld().getLocalDifficulty(horse.getBlockPos()), SpawnReason.MOB_SUMMONED, null);
             skeletonHorse.damage(world.getDamageSources().generic(), 0f);
             skeletonHorse.setPersistent();
             skeletonHorse.setBreedingAge(horse.isTame() ? horse.getBreedingAge() : 0);
             skeletonHorse.setTame(horse.isTame());
-            skeletonHorse.saddle(skeletonHorse.getSoundCategory());
+            skeletonHorse.saddle(horse.isSaddled() ? new ItemStack(Items.SADDLE): ItemStack.EMPTY,skeletonHorse.getSoundCategory());
             skeletonHorse.setCustomName(horse.getCustomName());
             skeletonHorse.setCustomNameVisible(skeletonHorse.hasCustomName());
         }
@@ -150,7 +148,7 @@ public class PiranhaEntity extends FaunusFishEntity implements GeoEntity {
         SkeletonEntity skeleton = EntityType.SKELETON.create(world);
 
         if (skeleton != null) {
-            skeleton.initialize(world, player.getWorld().getLocalDifficulty(player.getBlockPos()), SpawnReason.MOB_SUMMONED, null, null);
+            skeleton.initialize(world, player.getWorld().getLocalDifficulty(player.getBlockPos()), SpawnReason.MOB_SUMMONED, null);
             skeleton.refreshPositionAndAngles(player.getX(), player.getY(), player.getZ(), player.getYaw(), player.getPitch());
             skeleton.setCustomName(player.getName());
             skeleton.setCustomNameVisible(skeleton.hasCustomName());

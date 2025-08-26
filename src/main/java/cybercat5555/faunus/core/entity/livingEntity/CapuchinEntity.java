@@ -16,6 +16,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.passive.ArmadilloEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableShoulderEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -38,12 +39,12 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.ArrayList;
@@ -88,7 +89,7 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
         this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(2, new AttackCapuchinGoal(this, 1.5, false));
         this.goalSelector.add(3, new HangTreeGoal(this, 1.0));
-        this.goalSelector.add(4, new FollowOwnerGoal(this, 1.0, 5.0f, 1.0f, true));
+        this.goalSelector.add(4, new FollowOwnerGoal(this, 1.0, 5.0f, 1.0f));
 
         targetSelector.add(1, new RevengeGoal(this));
     }
@@ -218,11 +219,6 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
     }
 
     @Override
-    public EntityView method_48926() {
-        return getWorld();
-    }
-
-    @Override
     public void tick() {
         super.tick();
 
@@ -230,6 +226,7 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
             stopRiding();
         }
     }
+
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
@@ -256,7 +253,7 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
             if (!this.isTamed()) {
                 double changeToTame = Math.random();
                 if (changeToTame < 0.1) {
-                    this.setTamed(true);
+                    this.setTamed(true,true);
                     this.setOwner(player);
                     this.setPersistent();
 
@@ -286,6 +283,11 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
     @Override
     public TagKey<Item> getBreedingItemsTag() {
         return TagKey.of(RegistryKeys.ITEM, FaunusID.content("capuchin_breeding_items"));
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return stack.isIn(getBreedingItemsTag());
     }
 
     public boolean isNearCapuchin() {
@@ -339,7 +341,7 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
         }
 
         @Override
-        protected void attack(LivingEntity target, double squaredDistance) {
+        protected void attack(LivingEntity target) {
             if (this.mob.isInAttackRange(target)) {
                 this.mob.tryAttack(target);
             } else if(isCooledDown()) {
@@ -371,7 +373,7 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
 
 
             if (shouldAttack && this.mob.getTarget() != null) {
-                attack(this.mob.getTarget(), 4);
+                attack(this.mob.getTarget());
                 this.mob.setAttacking(true);
 
                 return !(this.mob.getTarget() instanceof PlayerEntity player) || !player.isCreative();

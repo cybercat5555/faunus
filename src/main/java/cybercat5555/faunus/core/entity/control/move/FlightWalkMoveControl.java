@@ -4,6 +4,7 @@ import cybercat5555.faunus.util.MCUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
+import net.minecraft.entity.ai.pathing.PathContext;
 import net.minecraft.entity.ai.pathing.PathNodeMaker;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -133,7 +134,7 @@ public class FlightWalkMoveControl extends MoveControl {
         if (entityNavigation != null) {
             PathNodeMaker pathNodeMaker = entityNavigation.getNodeMaker();
 
-            if (pathNodeMaker != null && pathNodeMaker.getDefaultNodeType(this.entity.getWorld(), MathHelper.floor(this.entity.getX() + (double) x), this.entity.getBlockY(), MathHelper.floor(this.entity.getZ() + (double) z)) != PathNodeType.WALKABLE) {
+            if (pathNodeMaker != null && pathNodeMaker.getDefaultNodeType(new PathContext(this.entity.getWorld(),this.entity), MathHelper.floor(this.entity.getX() + (double) x), this.entity.getBlockY(), MathHelper.floor(this.entity.getZ() + (double) z)) != PathNodeType.WALKABLE) {
                 return false;
             }
         }

@@ -36,12 +36,12 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class CrayfishEntity extends AnimalEntity implements GeoEntity, FeedableEntity {
@@ -62,9 +62,9 @@ public class CrayfishEntity extends AnimalEntity implements GeoEntity, FeedableE
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(VARIANT, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(VARIANT, 0);
     }
 
     @Override
@@ -190,6 +190,11 @@ public class CrayfishEntity extends AnimalEntity implements GeoEntity, FeedableE
         this.dataTracker.set(VARIANT, nbt.getInt("Variant"));
     }
 
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
+    }
+
     public boolean isBuried() {
         return isBuried;
     }
@@ -201,11 +206,11 @@ public class CrayfishEntity extends AnimalEntity implements GeoEntity, FeedableE
     /* VARIANT */
 
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         final float BLUE_CRAYFISH_CHANCE = 0.1F;
         setVariant(Math.random() < BLUE_CRAYFISH_CHANCE ? CrayfishVariant.BLUE : CrayfishVariant.DEFAULT);
 
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     public CrayfishVariant getVariant() {

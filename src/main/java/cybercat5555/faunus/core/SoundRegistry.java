@@ -33,7 +33,7 @@ public class SoundRegistry {
      * @return The sound event.
      */
     private static SoundEvent register(String name) {
-        Identifier id = new Identifier(Faunus.MODID, name);
+        Identifier id = Identifier.of(Faunus.MODID, name);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 

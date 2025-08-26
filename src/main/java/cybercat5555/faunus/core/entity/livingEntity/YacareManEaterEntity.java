@@ -20,8 +20,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 public class YacareManEaterEntity extends YacareEntity implements GeoEntity, BiteGrabEntity {
     protected boolean isGrabbing;
     protected boolean isPerformingDeathRoll;

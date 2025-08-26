@@ -21,7 +21,7 @@ public class RancidEffect extends StatusEffect {
 
 
     @Override
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         amplifier = Math.max(1, amplifier);
 
         loadAffectedEntities(entity, 24.0D, amplifier);
@@ -29,6 +29,7 @@ public class RancidEffect extends StatusEffect {
         applyRunAwayEffect(entity);
 
         super.applyUpdateEffect(entity, amplifier);
+        return true;
     }
 
 
@@ -80,7 +81,7 @@ public class RancidEffect extends StatusEffect {
     }
 
     @Override
-    public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
+    public void onRemoved(AttributeContainer attributes) {
         for (Entity nearbyEntity : runningEntities) {
             if (nearbyEntity instanceof MobEntity mob) {
                 mob.setTarget(null);
@@ -89,7 +90,7 @@ public class RancidEffect extends StatusEffect {
         }
 
         runningEntities.clear();
-        super.onRemoved(entity, attributes, amplifier);
+        super.onRemoved(attributes);
     }
 
     @Override

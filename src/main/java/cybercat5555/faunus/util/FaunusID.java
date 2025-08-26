@@ -9,6 +9,6 @@ public final class FaunusID {
 
 
     public static Identifier content(String name) {
-        return new Identifier(Faunus.MODID, name);
+        return Identifier.of(Faunus.MODID, name);
     }
 }

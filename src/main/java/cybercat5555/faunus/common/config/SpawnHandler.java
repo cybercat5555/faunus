@@ -6,9 +6,7 @@ import cybercat5555.faunus.core.entity.livingEntity.*;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.entity.*;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.util.Identifier;
@@ -20,21 +18,21 @@ public class SpawnHandler {
 
     public static void removeSpawn() {
         /* PIG */
-        BiomeModifications.create(new Identifier("remove_pig_spawn"))
+        BiomeModifications.create(Identifier.of("remove_pig_spawn"))
                 .add(
                         ModificationPhase.REMOVALS,
                         BiomeSelectors.tag(BiomeTags.IS_JUNGLE),
                         context -> context.getSpawnSettings().removeSpawns((spawnGroup, spawnEntry) -> spawnEntry.type == EntityType.PIG));
 
         /* COW */
-        BiomeModifications.create(new Identifier("remove_cow_spawn"))
+        BiomeModifications.create(Identifier.of("remove_cow_spawn"))
                 .add(
                         ModificationPhase.REMOVALS,
                         BiomeSelectors.tag(BiomeTags.IS_JUNGLE),
                         context -> context.getSpawnSettings().removeSpawns((spawnGroup, spawnEntry) -> spawnEntry.type == EntityType.COW));
 
         /* SHEEP */
-        BiomeModifications.create(new Identifier("remove_sheep_spawn"))
+        BiomeModifications.create(Identifier.of("remove_sheep_spawn"))
                 .add(
                         ModificationPhase.REMOVALS,
                         BiomeSelectors.tag(BiomeTags.IS_JUNGLE),
@@ -52,7 +50,7 @@ public class SpawnHandler {
 
         SpawnRestriction.register(
                 EntityRegistry.ARAPAIMA,
-                SpawnRestriction.Location.IN_WATER,
+                SpawnLocationTypes.IN_WATER,
                 Heightmap.Type.OCEAN_FLOOR,
                 ArapaimaEntity::canMobSpawn);
 
@@ -66,7 +64,7 @@ public class SpawnHandler {
 
         SpawnRestriction.register(
                 EntityRegistry.CAPUCHIN,
-                SpawnRestriction.Location.ON_GROUND,
+                SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING,
                 CapuchinEntity::canSpawn);
 
@@ -80,7 +78,7 @@ public class SpawnHandler {
 
         SpawnRestriction.register(
                 EntityRegistry.CRAYFISH,
-                SpawnRestriction.Location.IN_WATER,
+                SpawnLocationTypes.IN_WATER,
                 Heightmap.Type.OCEAN_FLOOR,
                 CrayfishEntity::canSpawn);
 
@@ -94,7 +92,7 @@ public class SpawnHandler {
 
         SpawnRestriction.register(
                 EntityRegistry.HOATZIN,
-                SpawnRestriction.Location.ON_GROUND,
+                SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING,
                 HoatzinEntity::canSpawnHoatzin);
 
@@ -108,7 +106,7 @@ public class SpawnHandler {
 
         SpawnRestriction.register(
                 EntityRegistry.IGUANA,
-                SpawnRestriction.Location.ON_GROUND,
+                SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING,
                 IguanaEntity::canSpawn);
 
@@ -122,7 +120,7 @@ public class SpawnHandler {
 
         SpawnRestriction.register(
                 EntityRegistry.LEECH,
-                SpawnRestriction.Location.IN_WATER,
+                SpawnLocationTypes.IN_WATER,
                 Heightmap.Type.OCEAN_FLOOR,
                 LeechEntity::canSpawn);
 
@@ -136,7 +134,7 @@ public class SpawnHandler {
 
         SpawnRestriction.register(
                 EntityRegistry.PIRANHA,
-                SpawnRestriction.Location.IN_WATER,
+                SpawnLocationTypes.IN_WATER,
                 Heightmap.Type.OCEAN_FLOOR,
                 PiranhaEntity::canSpawn);
 
@@ -150,7 +148,7 @@ public class SpawnHandler {
 
         SpawnRestriction.register(
                 EntityRegistry.QUETZAL,
-                SpawnRestriction.Location.ON_GROUND,
+                SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING,
                 QuetzalEntity::canSpawnQuetzal);
 
@@ -164,7 +162,7 @@ public class SpawnHandler {
 
         SpawnRestriction.register(
                 EntityRegistry.SNAPPING_TURTLE,
-                SpawnRestriction.Location.ON_GROUND,
+                SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                 SnappingTurtleEntity::canSpawn);
 
@@ -178,7 +176,7 @@ public class SpawnHandler {
 
         SpawnRestriction.register(
                 EntityRegistry.SONGBIRD,
-                SpawnRestriction.Location.ON_GROUND,
+                SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING,
                 SongbirdEntity::canSpawnSongbird);
 
@@ -192,7 +190,7 @@ public class SpawnHandler {
 
         SpawnRestriction.register(
                 EntityRegistry.TAPIR,
-                SpawnRestriction.Location.ON_GROUND,
+                SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                 AnimalEntity::isValidNaturalSpawn);
 
@@ -206,7 +204,7 @@ public class SpawnHandler {
 
         SpawnRestriction.register(
                 EntityRegistry.YACARE,
-                SpawnRestriction.Location.ON_GROUND,
+                SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                 YacareEntity::canSpawnYacare);
     }

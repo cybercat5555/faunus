@@ -1,7 +1,6 @@
 package cybercat5555.faunus.core.effect;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 
@@ -14,14 +13,14 @@ public class StopHealingEffect extends StatusEffect {
     }
 
     @Override
-    public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
+    public void onApplied(LivingEntity entity, int amplifier) {
         this.health = entity.getHealth();
 
-        super.onApplied(entity, attributes, amplifier);
+        super.onApplied(entity, amplifier);
     }
 
     @Override
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         if (entity.getHealth() >= this.health) {
             entity.setHealth(this.health);
             entity.hurtTime = -1;
@@ -30,6 +29,7 @@ public class StopHealingEffect extends StatusEffect {
         }
 
         super.applyUpdateEffect(entity, amplifier);
+        return true;
     }
 
     @Override

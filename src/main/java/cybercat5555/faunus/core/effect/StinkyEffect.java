@@ -7,7 +7,6 @@ import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +19,14 @@ public class StinkyEffect extends StatusEffect {
     }
 
     @Override
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         amplifier = Math.max(1, amplifier);
 
         loadAffectedEntities(entity, 24.0D, amplifier);
         targetEntity(entity);
 
         super.applyUpdateEffect(entity, amplifier);
+        return true;
     }
 
     private void loadAffectedEntities(LivingEntity effectEntity, double radius, float amplifier) {
@@ -47,12 +47,12 @@ public class StinkyEffect extends StatusEffect {
     }
 
     @Override
-    public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
+    public void onRemoved(AttributeContainer attributes) {
         for (Entity attackingEntity : attackingEntities) {
             ((HostileEntity) attackingEntity).setTarget(null);
         }
 
-        super.onRemoved(entity, attributes, amplifier);
+        super.onRemoved(attributes);
     }
 
     @Override
