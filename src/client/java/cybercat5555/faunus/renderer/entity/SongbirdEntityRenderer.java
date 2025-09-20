@@ -38,6 +38,7 @@ public class SongbirdEntityRenderer extends GeoEntityRenderer<SongbirdEntity> {
         var green = 0.0f;
         var blue = 0.0f;
 
+
         if (bone.getName().equals("belly")) {
             float[] color = songbird.getBirdVariant().getBellyColor();
             red = color[0];

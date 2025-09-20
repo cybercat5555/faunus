@@ -3,25 +3,31 @@ package cybercat5555.faunus.core.entity.livingEntity;
 import cybercat5555.faunus.core.EntityRegistry;
 import cybercat5555.faunus.core.SoundRegistry;
 import cybercat5555.faunus.core.entity.FeedableEntity;
-import cybercat5555.faunus.core.entity.ai.goals.HangTreeGoal;
+import cybercat5555.faunus.core.entity.ai.goals.CapuchinBringItemGoal;
+import cybercat5555.faunus.core.entity.ai.goals.CapuchinCollectItemGoal;
 import cybercat5555.faunus.core.entity.projectile.CocoaBeanProjectile;
 import cybercat5555.faunus.util.FaunusID;
+import net.fabricmc.fabric.impl.tag.convention.v2.TagRegistration;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.component.EnchantmentEffectComponentTypes;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.passive.ArmadilloEntity;
 import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.passive.TameableShoulderEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
@@ -33,7 +39,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
@@ -48,6 +53,7 @@ import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity, FeedableEntity {
     protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("idle");
@@ -82,17 +88,47 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1f);
     }
 
+    private List<ItemEntity> targetItems = new ArrayList<>();
+    public List<ItemEntity> getTargetItems() {
+        return targetItems;
+    }
+
+    public void setTargetItems(List<ItemEntity> items) {
+        this.targetItems = items;
+    }
+
+
     @Override
     protected void initGoals() {
-        this.goalSelector.add(0, new AnimalMateGoal(this, 1.0D));
-        this.goalSelector.add(1, new RunAwayCapuchinGoal(this, 1.5));
-        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
-        this.goalSelector.add(2, new AttackCapuchinGoal(this, 1.5, false));
-        this.goalSelector.add(3, new HangTreeGoal(this, 1.0));
-        this.goalSelector.add(4, new FollowOwnerGoal(this, 1.0, 5.0f, 1.0f));
+        this.goalSelector.add(0, new CapuchinCollectItemGoal(this));
+        this.goalSelector.add(1, new CapuchinBringItemGoal(this));
+        this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
+        this.goalSelector.add(3, new RunAwayCapuchinGoal(this, 1.5));
+        this.goalSelector.add(4, new AttackCapuchinGoal(this, 1.5, false));
+        this.goalSelector.add(5, new FollowOwnerGoal(this, 1.0, 5.0f, 1.0f));
+        this.goalSelector.add(6, new WanderAroundGoal(this, 1.0){
+            @Override
+            public boolean canStart() {
+                return super.canStart() && !((CapuchinEntity)this.mob).isSitting();
+            }
 
-        targetSelector.add(1, new RevengeGoal(this));
+            @Override
+            public boolean shouldContinue() {
+                return super.shouldContinue() && !((CapuchinEntity)this.mob).isSitting();
+            }
+        });
+//        this.goalSelector.add(4, new HangTreeGoal(this, 1.0));
+        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
+
+        this.targetSelector.add(1, new RevengeGoal(this));
     }
+
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(SITTING, false);
+    }
+
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
@@ -113,7 +149,6 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
         boolean isNear2Capuchin = this.nearCapuchinCount(16) >= 2;
         boolean isHangingTree = isHangingTree(this.getPos().add(0, 1, 0)) && getWorld().getBlockState(getBlockPos().down()).isAir();
         boolean isAlreadyPlayingHangingAnim = event.getController().getCurrentRawAnimation() == HANGING_HANDS_IDLE_ANIM || event.getController().getCurrentRawAnimation() == HANGING_TAIL_IDLE_ANIM;
-
 
         if (isSitting) {
             if (isSittingInPlayerShoulder) {
@@ -227,11 +262,34 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
         }
     }
 
+    @Override
+    public void onDeath(DamageSource damageSource) {
+        super.onDeath(damageSource);
+        this.dropInventory();
+    }
+
+    @Override
+    protected void dropInventory() {
+        ItemStack itemStack = this.getEquippedStack(EquipmentSlot.MAINHAND);
+        if (!itemStack.isEmpty()) {
+            this.dropStack(itemStack);
+            this.equipStack(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+        }
+    }
+    protected static final TrackedData<Boolean> SITTING = DataTracker.registerData(CapuchinEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack handItem = player.getStackInHand(hand);
         feedEntity(player, handItem);
+
+        if(player.getWorld().isClient()){
+            if(this.getOwner() == player){
+                return ActionResult.SUCCESS;
+            }else {
+                return ActionResult.FAIL;
+            }
+        }
 
         if (isOwner(player) && hand.equals(Hand.MAIN_HAND)) {
             if (player.isSneaking()) {
@@ -245,7 +303,34 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
     }
 
     @Override
+    public void readNbt(NbtCompound nbt) {
+        super.readNbt(nbt);
+        this.setSitting(nbt.getBoolean("Sitting"));
+    }
+
+    @Override
+    public NbtCompound writeNbt(NbtCompound nbt) {
+        nbt = super.writeNbt(nbt);
+        nbt.putBoolean("Sitting", this.isSitting());
+        return nbt;
+    }
+
+    @Override
+    public boolean isSitting() {
+        return this.dataTracker.get(SITTING);
+    }
+
+    @Override
+    public void setSitting(boolean sitting) {
+        this.dataTracker.set(SITTING, sitting);
+    }
+
+    @Override
     public void feedEntity(PlayerEntity player, ItemStack stack) {
+
+        if(!(player.getWorld() instanceof ServerWorld serverWorld)) {
+            return;
+        }
         if (canFedWithItem(stack)) {
             hasBeenFed = true;
             setLoveTicks(MAX_LOVE_TICKS);
@@ -256,10 +341,9 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
                     this.setTamed(true,true);
                     this.setOwner(player);
                     this.setPersistent();
-
-                    this.spawnHearts();
+                    serverWorld.spawnParticles(ParticleTypes.HEART, this.getX(), this.getY(), this.getZ(), 15, 0.5,0.5,0.5, 1);
                 } else {
-                    this.spawnConsumption();
+                    serverWorld.spawnParticles(ParticleTypes.ASH,  this.getX(), this.getY(), this.getZ(), 15, 0.5,0.5,0.5,1);
                 }
 
                 if (!player.isCreative() && !player.isSpectator()) {
@@ -304,24 +388,6 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
         return entities.size();
     }
 
-    private void spawnHearts() {
-        for (int i = 0; i < 7; i++) {
-            double d = this.random.nextGaussian() * 0.02D;
-            double e = this.random.nextGaussian() * 0.02D;
-            double f = this.random.nextGaussian() * 0.02D;
-            this.getWorld().addParticle(ParticleTypes.HEART, this.getParticleX(1.0D), this.getRandomBodyY() + 0.5D, this.getParticleZ(1.0D), d, e, f);
-        }
-    }
-
-    private void spawnConsumption() {
-        for (int i = 0; i < 7; i++) {
-            double d = this.random.nextGaussian() * 0.02D;
-            double e = this.random.nextGaussian() * 0.02D;
-            double f = this.random.nextGaussian() * 0.02D;
-            this.getWorld().addParticle(ParticleTypes.ASH, this.getParticleX(1.0D), this.getRandomBodyY() + 0.5D, this.getParticleZ(1.0D), d, e, f);
-        }
-    }
-
     private boolean isHangingTree(Vec3d pos) {
         BlockPos blockPos = new BlockPos((int) pos.x, (int) pos.y, (int) pos.z);
 
@@ -333,6 +399,7 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return EntityRegistry.CAPUCHIN.create(world);
     }
+
 
     static class AttackCapuchinGoal extends MeleeAttackGoal {
 

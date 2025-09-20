@@ -58,6 +58,9 @@ dependencies {
     // smart brain lib
     modImplementation "net.tslat.smartbrainlib:SmartBrainLib-fabric-${project.minecraft_version}:${project.smart_brain_lib_version}"
     modImplementation "dev.emi:trinkets:${trinkets_version}"
+
+    //remove this, i just was watching how shoulder hampster rendering implemented
+    files("run/adorablehamsterpets-3.2.0-1.21.1+fabric (1).jar")
 }
 
 processResources {

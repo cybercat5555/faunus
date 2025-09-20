@@ -1,6 +1,7 @@
 package cybercat5555.faunus.util;
 
 import cybercat5555.faunus.Faunus;
+import net.minecraft.server.command.EffectCommand;
 import net.minecraft.util.Identifier;
 
 public final class FaunusID {

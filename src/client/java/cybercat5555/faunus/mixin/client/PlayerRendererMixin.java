@@ -36,7 +36,6 @@ public abstract class PlayerRendererMixin
     private void renderInYacareMouth(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         this.setModelPose(abstractClientPlayerEntity);
 
-
         // Rotate body model based on vehicle look direction
         matrixStack.push();
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90));
