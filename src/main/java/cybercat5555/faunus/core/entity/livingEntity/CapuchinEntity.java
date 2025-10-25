@@ -105,8 +105,9 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
         this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
         this.goalSelector.add(3, new RunAwayCapuchinGoal(this, 1.5));
         this.goalSelector.add(4, new AttackCapuchinGoal(this, 1.5, false));
-        this.goalSelector.add(5, new FollowOwnerGoal(this, 1.0, 5.0f, 1.0f));
-        this.goalSelector.add(6, new WanderAroundGoal(this, 1.0){
+        this.goalSelector.add(5, new SitOnOwnerShoulderGoal(this));
+        this.goalSelector.add(6, new FollowOwnerGoal(this, 1.0, 5.0f, 1.0f));
+        this.goalSelector.add(7, new WanderAroundGoal(this, 1.0){
             @Override
             public boolean canStart() {
                 return super.canStart() && !((CapuchinEntity)this.mob).isSitting();
@@ -118,7 +119,7 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
             }
         });
 //        this.goalSelector.add(4, new HangTreeGoal(this, 1.0));
-        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
+        this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
 
         this.targetSelector.add(1, new RevengeGoal(this));
     }
