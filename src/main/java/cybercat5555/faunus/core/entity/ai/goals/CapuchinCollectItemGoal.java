@@ -3,6 +3,7 @@ package cybercat5555.faunus.core.entity.ai.goals;
 import cybercat5555.faunus.core.entity.livingEntity.CapuchinEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 
 import java.util.EnumSet;
@@ -13,7 +14,7 @@ public class CapuchinCollectItemGoal extends Goal {
 
     public CapuchinCollectItemGoal(CapuchinEntity capuchinEntity) {
         this.target = capuchinEntity;
-        this.setControls(EnumSet.of(Control.JUMP, Control.TARGET));
+        this.setControls(EnumSet.of(Control.MOVE, Control.JUMP, Control.TARGET, Control.LOOK));
     }
 
     @Override
@@ -33,6 +34,7 @@ public class CapuchinCollectItemGoal extends Goal {
     }
 
     public void tick() {
+        this.target.getWorld().getServer().getPlayerManager().getPlayerList().forEach(p-> p.sendMessage(Text.literal("Tick collect")));
 
         if(targetItem != null){
             if (this.target.distanceTo(this.targetItem) <= 1.5 || (this.target.getNavigation().getCurrentPath() != null && this.target.getNavigation().getCurrentPath().isFinished())) {

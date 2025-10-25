@@ -1,5 +1,6 @@
 package cybercat5555.faunus.core.entity.livingEntity;
 
+import com.mojang.authlib.minecraft.client.MinecraftClient;
 import cybercat5555.faunus.core.EntityRegistry;
 import cybercat5555.faunus.core.SoundRegistry;
 import cybercat5555.faunus.core.entity.FeedableEntity;
@@ -34,6 +35,7 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -105,8 +107,8 @@ public class CapuchinEntity extends TameableShoulderEntity implements GeoEntity,
         this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
         this.goalSelector.add(3, new RunAwayCapuchinGoal(this, 1.5));
         this.goalSelector.add(4, new AttackCapuchinGoal(this, 1.5, false));
-        this.goalSelector.add(5, new SitOnOwnerShoulderGoal(this));
-        this.goalSelector.add(6, new FollowOwnerGoal(this, 1.0, 5.0f, 1.0f));
+        this.goalSelector.add(5, new FollowOwnerGoal(this, 1.0, 5.0f, 1.0f));
+//        this.goalSelector.add(6, new SitOnOwnerShoulderGoal(this));
         this.goalSelector.add(7, new WanderAroundGoal(this, 1.0){
             @Override
             public boolean canStart() {
