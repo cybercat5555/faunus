@@ -10,10 +10,7 @@ import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.control.AquaticMoveControl;
-import net.minecraft.entity.ai.goal.LookAroundGoal;
-import net.minecraft.entity.ai.goal.LookAtEntityGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
@@ -21,6 +18,8 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.DolphinEntity;
+import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -70,11 +69,11 @@ public class CrayfishEntity extends AnimalEntity implements GeoEntity, FeedableE
     @Override
     protected void initGoals() {
         super.initGoals();
-        this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(0, new BuryOnChased(this, 2F));
         this.goalSelector.add(1, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(2, new LookAroundGoal(this));
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D));
+        this.goalSelector.add(3, new SwimAroundGoal(this, 1.0D,10 ));
     }
 
     public static DefaultAttributeContainer.Builder createMobAttributes() {

@@ -9,23 +9,25 @@ import cybercat5555.faunus.util.FaunusID;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.NoPenaltyTargeting;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
-import net.minecraft.entity.ai.goal.SwimAroundGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.EndermanEntity;
+import net.minecraft.entity.mob.GuardianEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.FishEntity;
+import net.minecraft.entity.passive.PufferfishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.Item;
@@ -56,6 +58,7 @@ import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.xml.crypto.Data;
+import java.util.EnumSet;
 
 public class ArapaimaEntity extends FishEntity implements GeoEntity, FeedableEntity, MateEntity {
     protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("idle");
@@ -77,17 +80,17 @@ public class ArapaimaEntity extends FishEntity implements GeoEntity, FeedableEnt
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new ArapaimaRamGoal(this, 10d));
-        this.goalSelector.add(2, new ArapaimaMateGoal(this, 1.0D));
-        this.goalSelector.add(3, new LayEggGoal(this, 1.0D));
-        this.goalSelector.add(4, new SwimAroundGoal(this, 1.0D, 65));
+        this.goalSelector.add(2, new ArapaimaRamGoal(this, 1d));
+        this.goalSelector.add(3, new ArapaimaMateGoal(this, 1.0D));
+        this.goalSelector.add(5, new LayEggGoal(this, 1.0D));
+        this.goalSelector.add(3, new SwimAroundGoal(this, 4.0D, 100));
         super.initGoals();
     }
 
     public static DefaultAttributeContainer.Builder createMobAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 24f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.7f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6f)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.3f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.5f);
@@ -164,7 +167,7 @@ public class ArapaimaEntity extends FishEntity implements GeoEntity, FeedableEnt
     }
 
     protected <E extends ArapaimaEntity> PlayState idleAnimController(final AnimationState<E> state) {
-        if (!isSubmergedInWater()) {
+        if (!isTouchingWater()) {
             state.setAndContinue(FLOP_ANIM);
         } else if (state.isMoving()) {
             state.setAndContinue(isAttacking() ? ATTACK_ANIM : SWIM_ANIM);
@@ -337,18 +340,20 @@ public class ArapaimaEntity extends FishEntity implements GeoEntity, FeedableEnt
         @Override
         public void tick() {
             if (mustFlee) {
-                Vec3d vec3d = NoPenaltyTargeting.find(this.mob, 4, 1);
-
-                if (vec3d != null && this.mob.getNavigation().isIdle()) {
-                    this.mob.getNavigation().startMovingTo(vec3d.x, vec3d.y, vec3d.z, this.speed);
-                    stop();
+                if (!this.mob.getNavigation().isFollowingPath()) {
+                    Vec3d vec3d = NoPenaltyTargeting.find(this.mob, 20, 3);
+                    if (vec3d != null) {
+                        this.mob.getNavigation().startMovingTo(272, 49, -168, 400);
+                    }
                 }
             } else {
-                this.mob.getNavigation().startMovingTo(this.mob.getLastAttacker(), this.speed);
-                this.mob.setVelocity(this.mob.getVelocity().multiply(3));
+                this.mob.setVelocity(this.mob.getLastAttacker().getPos().add(this.mob.getPos().negate()).normalize().multiply(1));
+                this.mob.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, this.mob.getLastAttacker().getPos());
+                this.mob.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, this.mob.getLastAttacker().getPos());
 
                 if (attack(this.mob.getLastAttacker())) {
                     mustFlee = true;
+                    this.mob.getNavigation().stop();
                 }
             }
 
@@ -356,26 +361,29 @@ public class ArapaimaEntity extends FishEntity implements GeoEntity, FeedableEnt
         }
 
         protected boolean attack(LivingEntity target) {
-//            double squaredDistance = this.mob.getSquaredDistanceToAttackPosOf(this.mob.getLastAttacker());
-//            double distance = this.mob.getSquaredDistanceToAttackPosOf(target);
-//
-//            if (squaredDistance <= distance) {
+            if (this.mob.getPos().distanceTo(target.getPos()) <= 2) {
                 this.mob.tryAttack(target);
                 return true;
-//            }
+            }
 
-//            return false;
+            return false;
         }
 
         @Override
         public void start() {
-            if (Math.random() < 0.6F) {
-                this.mob.setTarget(this.mob.getLastAttacker());
-            } else {
-                mustFlee = true;
-            }
+            this.mob.setTarget(this.mob.getLastAttacker());
+            mustFlee = false;
+
+
+//            mustFlee = true; //REMOVE THIS, ONLY FOR TESTING
 
             super.start();
+        }
+
+
+        @Override
+        public EnumSet<Control> getControls() {
+            return EnumSet.of(Control.TARGET, Control.MOVE, Control.LOOK);
         }
 
         @Override
@@ -386,6 +394,14 @@ public class ArapaimaEntity extends FishEntity implements GeoEntity, FeedableEnt
         @Override
         public void stop() {
             super.stop();
+        }
+
+        @Override
+        public boolean canStop() {
+            //yes i can just return, but this is easier to debug
+            if (this.mob.age - this.mob.getLastAttackedTime() > 20 * 10 || this.mob.getPos().distanceTo(this.mob.getLastAttacker().getPos()) > 10) {
+                return true;
+            } else return false;
         }
 
         @Override

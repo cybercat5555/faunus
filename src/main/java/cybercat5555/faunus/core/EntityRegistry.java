@@ -4,21 +4,17 @@ import cybercat5555.faunus.Faunus;
 import cybercat5555.faunus.core.entity.livingEntity.*;
 import cybercat5555.faunus.core.entity.projectile.CocoaBeanProjectile;
 import cybercat5555.faunus.util.FaunusID;
-import cybercat5555.faunus.util.MCUtil;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.*;
-import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.world.Heightmap;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
-
-import static cybercat5555.faunus.common.config.MobSpawningConfig.*;
 
 public final class EntityRegistry {
     private EntityRegistry() {
@@ -110,7 +106,9 @@ public final class EntityRegistry {
         FabricDefaultAttributeRegistry.register(LEECH, LeechEntity.createMobAttributes());
         FabricDefaultAttributeRegistry.register(YACARE, YacareEntity.createMobAttributes());
         FabricDefaultAttributeRegistry.register(YACARE_MANEATER, YacareManEaterEntity.createMobAttributes());
+
     }
+
 
     private static <T extends Entity> EntityType<T> register(String name, EntityType<T> type) {
         return Registry.register(Registries.ENTITY_TYPE, FaunusID.content(name), type);

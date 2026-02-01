@@ -30,17 +30,21 @@ public abstract class PlayerMixin extends LivingEntity {
     private void dropButNotQuetzals(PlayerEntity instance) {
         if (instance.shoulderEntityAddedTime + 20L < instance.getWorld().getTime()) {
             var leftnbt = instance.getShoulderEntityLeft();
-            var left = EntityType.getEntityFromNbt(leftnbt, instance.getWorld()).orElse(null);
-            if (!(left instanceof QuetzalEntity)) {
-                instance.dropShoulderEntity(leftnbt);
-                instance.setShoulderEntityLeft(new NbtCompound());
+            if (!leftnbt.isEmpty()) {
+                var left = EntityType.getEntityFromNbt(leftnbt, instance.getWorld()).orElse(null);
+                if (!(left instanceof QuetzalEntity)) {
+                    instance.dropShoulderEntity(leftnbt);
+                    instance.setShoulderEntityLeft(new NbtCompound());
+                }
             }
             var rightnbt = instance.getShoulderEntityLeft();
-            var right = EntityType.getEntityFromNbt(rightnbt, instance.getWorld()).orElse(null);
-            if (!(right instanceof QuetzalEntity)) {
+            if (!rightnbt.isEmpty()) {
+                var right = EntityType.getEntityFromNbt(rightnbt, instance.getWorld()).orElse(null);
+                if (!(right instanceof QuetzalEntity)) {
 
-                instance.dropShoulderEntity(instance.getShoulderEntityRight());
-                instance.setShoulderEntityRight(new NbtCompound());
+                    instance.dropShoulderEntity(instance.getShoulderEntityRight());
+                    instance.setShoulderEntityRight(new NbtCompound());
+                }
             }
         }
     }

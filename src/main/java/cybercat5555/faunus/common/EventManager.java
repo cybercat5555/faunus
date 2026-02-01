@@ -79,34 +79,34 @@ public class EventManager {
                 );
 
                 var items = world.getEntitiesByType(TypeFilter.equals(ItemEntity.class), box, e -> true);
-                items.forEach(item -> {
-                    world.spawnParticles(
-                            ParticleTypes.CLOUD,
-                            item.getX(), item.getY() + 0.4, item.getZ(),
-                            1, 0, 0, 0, 0
-                    );
-                });
+//                items.forEach(item -> {
+//                    world.spawnParticles(
+//                            ParticleTypes.CLOUD,
+//                            item.getX(), item.getY() + 0.4, item.getZ(),
+//                            1, 0, 0, 0, 0
+//                    );
+//                });
 
                 capuchins.forEach(c->c.setTargetItems(items));
 
-                double step = 0.25;
-                for (double x = box.minX; x <= box.maxX; x += step) {
-                    for (double y = box.minY; y <= box.maxY; y += step) {
-                        for (double z = box.minZ; z <= box.maxZ; z += step) {
-                            int edges = 0;
-                            if (x == box.minX || x == box.maxX) edges++;
-                            if (y == box.minY || y == box.maxY) edges++;
-                            if (z == box.minZ || z == box.maxZ) edges++;
-                            if (edges >= 2) {
-                                world.spawnParticles(
-                                        ParticleTypes.FLAME,
-                                        x, y, z,
-                                        1, 0, 0, 0, 0
-                                );
-                            }
-                        }
-                    }
-                }
+//                double step = 0.25;
+//                for (double x = box.minX; x <= box.maxX; x += step) {
+//                    for (double y = box.minY; y <= box.maxY; y += step) {
+//                        for (double z = box.minZ; z <= box.maxZ; z += step) {
+//                            int edges = 0;
+//                            if (x == box.minX || x == box.maxX) edges++;
+//                            if (y == box.minY || y == box.maxY) edges++;
+//                            if (z == box.minZ || z == box.maxZ) edges++;
+//                            if (edges >= 2) {
+//                                world.spawnParticles(
+//                                        ParticleTypes.FLAME,
+//                                        x, y, z,
+//                                        1, 0, 0, 0, 0
+//                                );
+//                            }
+//                        }
+//                    }
+//                }
             }
         });
     }

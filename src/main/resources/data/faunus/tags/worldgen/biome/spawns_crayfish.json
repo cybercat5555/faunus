@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#c:swamp"
+    "#c:is_swamp",
+    "#minecraft:is_river"
   ]
 }
